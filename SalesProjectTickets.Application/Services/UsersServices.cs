@@ -30,7 +30,7 @@ namespace SalesProjectTickets.Application.Services
                 }
             }
 
-            var userExisting = reposBase.UserExisting(entity);
+            var userExisting = await reposBase.UserExisting(entity);
             if (userExisting != null)
             {
                 throw new ValidationException(MessagesError.MESSAGES_EXISTING_USER);

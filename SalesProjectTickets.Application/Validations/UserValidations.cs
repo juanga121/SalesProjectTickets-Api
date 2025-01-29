@@ -25,9 +25,6 @@ namespace SalesProjectTickets.Application.Validations
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage(MessagesError.MESSAGES_REQUERID_PASSWORD)
                 .Matches(ConstantsUser.PASSWORD_EXPRESSIONS);
-            RuleFor(x => x.Creation_date)
-                .Must(date => date <= DateOnly.FromDateTime(DateTime.Now)).WithMessage(MessagesError.MESSAGES_OLDER_DATE)
-                .Must(date => date >= DateOnly.FromDateTime(DateTime.Now)).WithMessage(MessagesError.MESSAGES_MINOR_DATE);
         }
     }
 }

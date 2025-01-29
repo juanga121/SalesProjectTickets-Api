@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using SalesProjectTickets.Application.Services;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Infrastructure.Contexts;
@@ -27,12 +28,12 @@ namespace SalesProjectTickets.Api.Controllers
 
         [HttpPost]
         [Route("AddUsers")]
-        public async Task<IActionResult> Add(Users users)
+        public async Task<IActionResult> Add([FromBody] Users users)
         {
             var service = AddServices();
             await service.Add(users);
 
-            return Ok("Usuario agregado exitosamente");
+            return Ok( new {message = "Usuario agregado exitosamente"});
         }
 
         [HttpGet]

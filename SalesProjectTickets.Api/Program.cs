@@ -58,13 +58,11 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("Consumidor", policy => policy.RequireClaim("Permissions", "Consumidor"))
     .AddPolicy("AdminAndConsu", policy => policy.RequireClaim("Permissions", "Administrador", "Consumidor"));
 
-var AllowedOrigins = builder.Configuration.GetValue<string>("AllowedOrigins")!.Split(",");
-
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy("DefaultPolicy", policy =>
     {
-        policy.WithOrigins(AllowedOrigins).AllowAnyHeader().AllowAnyMethod();
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
 
@@ -79,7 +77,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors();
+app.UseCors("DefaultPolicy");
 
 app.UseAuthorization();
 

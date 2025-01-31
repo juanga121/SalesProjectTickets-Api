@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using SalesProjectTickets.Application.Services;
+using SalesProjectTickets.Application.Shared;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Infrastructure.Contexts;
 using SalesProjectTickets.Infrastructure.Repositories;
@@ -30,10 +31,20 @@ namespace SalesProjectTickets.Api.Controllers
         [Route("AddUsers")]
         public async Task<IActionResult> Add([FromBody] Users users)
         {
-            var service = AddServices();
-            await service.Add(users);
+            try
+            {
+                var service = AddServices();
+                await service.Add(users);
 
-            return Ok( new {message = "Usuario agregado exitosamente"});
+                return Ok(new { message = "Usuario agregado exitosamente" });
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
         }
 
         [HttpGet]

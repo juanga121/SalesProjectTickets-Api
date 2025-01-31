@@ -15,22 +15,33 @@ namespace SalesProjectTickets.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginUsers loginUsers)
         {
-            var users = await servicesLogin.Login(loginUsers);
-            if (users == null)
+            try
             {
-                return BadRequest(new
+                var users = await servicesLogin.Login(loginUsers);
+                if (users == null)
                 {
-                    Message = "Credenciales incorrectas"
+                    return BadRequest(new
+                    {
+                        Message = "Credenciales incorrectas"
+                    });
+                }
+
+                var token = tokenProvider.GenerateToken(users);
+
+                return Ok(new
+                {
+                    Token = token,
+                    messages = "Login exitoso"
+                });
+            }catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = "Ocurrio un error al procesar la solicitud",
+                    Details = ex.Message
                 });
             }
-
-            var token = tokenProvider.GenerateToken(users);
-
-            return Ok(new
-            {
-                Token = token,
-                messages = "Login exitoso"
-            });
+            
         }
     }
 }

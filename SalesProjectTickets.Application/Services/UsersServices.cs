@@ -30,6 +30,8 @@ namespace SalesProjectTickets.Application.Services
                 }
             }
 
+            entity.Creation_date = DateOnly.FromDateTime(DateTime.Now);
+
             var userExisting = await reposBase.UserExisting(entity);
             if (userExisting != null)
             {

@@ -40,10 +40,7 @@ namespace SalesProjectTickets.Api.Controllers
             }
             catch (ValidationException ex)
             {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
+                return BadRequest(new { message = ex.Message });
             }
         }
 

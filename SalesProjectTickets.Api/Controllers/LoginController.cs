@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using SalesProjectTickets.Application.Interfaces;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Infrastructure.Provider;
@@ -33,15 +34,13 @@ namespace SalesProjectTickets.Api.Controllers
                     Token = token,
                     messages = "Login exitoso"
                 });
-            }catch (Exception ex)
+            }catch(Exception ex)
             {
-                return StatusCode(500, new
+                return BadRequest(new
                 {
-                    Message = "Ocurrio un error al procesar la solicitud",
-                    Details = ex.Message
+                    message = ex.Message
                 });
             }
-            
         }
     }
 }

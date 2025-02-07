@@ -1,6 +1,7 @@
 ﻿using SalesProjectTickets.Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace SalesProjectTickets.Domain.Entities
 {
     public class Tickets
     {
+        [Key]
         public Guid Id_ticket { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; }

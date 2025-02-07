@@ -11,10 +11,10 @@ namespace SalesProjectTickets.Infrastructure.Provider
     {
         public string GenerateToken(LoginUsers loginUsers)
         {
-            string? SecretKey = configuration["Jwt:SecretKey"];
-            var SecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey!));
-            var Credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
-            var TokenDescriptor = new SecurityTokenDescriptor
+            string SecretKey = configuration["Jwt:SecretKey"] ?? throw new Exception("");
+            SymmetricSecurityKey SecurityKey = new (Encoding.UTF8.GetBytes(SecretKey!));
+            SigningCredentials Credentials = new(SecurityKey, SecurityAlgorithms.HmacSha256);
+            SecurityTokenDescriptor TokenDescriptor = new()
             {
                 Subject = new ClaimsIdentity(
                 [
@@ -28,7 +28,7 @@ namespace SalesProjectTickets.Infrastructure.Provider
                 Audience = configuration["Jwt:Audience"]
             };
 
-            var TokenHandler = new JsonWebTokenHandler();
+            JsonWebTokenHandler TokenHandler = new();
 
             string token = TokenHandler.CreateToken(TokenDescriptor);
             return token;

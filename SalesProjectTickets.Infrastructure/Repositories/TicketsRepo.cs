@@ -7,16 +7,10 @@ using SalesProjectTickets.Infrastructure.Contexts;
 
 namespace SalesProjectTickets.Infrastructure.Repositories
 {
-    public class TicketsRepo : IRepoTickets<Tickets, Guid, Permissions>
+    public class TicketsRepo(ContextsDaBa context, IHttpContextAccessor httpContextAccessor) : IRepoTickets<Tickets, Guid, Permissions>
     {
-        private readonly ContextsDaBa _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public TicketsRepo(ContextsDaBa context, IHttpContextAccessor httpContextAccessor)
-        {
-            _context = context;
-            _httpContextAccessor = httpContextAccessor;
-        }
+        private readonly ContextsDaBa _context = context;
+        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
         public async Task<Tickets> Add(Tickets entity)
         {

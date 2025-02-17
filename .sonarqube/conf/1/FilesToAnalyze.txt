@@ -1,0 +1,11 @@
+﻿C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Interfaces\IServiceLogin.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Interfaces\IServiceTickets.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Interfaces\IServiceUsers.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Services\LoginServices.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Services\TicketsServices.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Services\UsersServices.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Shared\ConstantsUser.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Shared\MessagesError.Designer.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Validations\TicketValidations.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Validations\UserValidations.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Shared\MessagesError.resx

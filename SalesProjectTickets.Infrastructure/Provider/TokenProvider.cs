@@ -2,6 +2,8 @@
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using SalesProjectTickets.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
+using System.Numerics;
 using System.Security.Claims;
 using System.Text;
 
@@ -11,7 +13,7 @@ namespace SalesProjectTickets.Infrastructure.Provider
     {
         public string GenerateToken(LoginUsers loginUsers)
         {
-            string SecretKey = configuration["Jwt:SecretKey"] ?? throw new Exception("");
+            string SecretKey = configuration["Jwt:SecretKey"] ?? throw new ValidationException("Clave secreta no encontrada en la configuración");
             SymmetricSecurityKey SecurityKey = new (Encoding.UTF8.GetBytes(SecretKey!));
             SigningCredentials Credentials = new(SecurityKey, SecurityAlgorithms.HmacSha256);
             SecurityTokenDescriptor TokenDescriptor = new()

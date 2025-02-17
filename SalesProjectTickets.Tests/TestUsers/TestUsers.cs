@@ -37,7 +37,7 @@ namespace SalesProjectTickets.Tests.TestUsers
                 Email = "juanpaj@gmail.com",
                 Password = "JuanP12#",
                 Creation_date = DateOnly.FromDateTime(DateTime.Now),
-                Permission = Permissions.SuperUsuario
+                Permissions = Permissions.SuperUsuario
             };
 
             // Configuracion para que la validacion falle
@@ -63,7 +63,7 @@ namespace SalesProjectTickets.Tests.TestUsers
                 Email = "juanpaj@gmail.com",
                 Password = "JuanP12#",
                 Creation_date = DateOnly.FromDateTime(DateTime.Now),
-                Permission = Permissions.SuperUsuario
+                Permissions = Permissions.SuperUsuario
             };
 
             _mockValidator
@@ -81,7 +81,7 @@ namespace SalesProjectTickets.Tests.TestUsers
                     Email = "juanpaj@gmail.com",
                     Password = "JuanP12#",
                     Creation_date = DateOnly.FromDateTime(DateTime.Now),
-                    Permission = Permissions.SuperUsuario
+                    Permissions = Permissions.SuperUsuario
                 }); // Configuracion para que el repo retorne un usuario existente
 
             // Verificar que la excepcion sea lanzada

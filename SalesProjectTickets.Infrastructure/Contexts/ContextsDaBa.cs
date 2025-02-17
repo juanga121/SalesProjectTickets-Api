@@ -8,19 +8,5 @@ namespace SalesProjectTickets.Infrastructure.Contexts
         public DbSet<Users> Users { get; set; }
 
         public DbSet<Tickets> Tickets { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Tickets>().HasKey(t => t.Id_ticket);
-
-            modelBuilder.Entity<Tickets>(entity =>
-            {
-                entity.Property(e => e.Price)
-                      .HasColumnType("decimal(18, 2)");
-            });
-
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

@@ -24,7 +24,7 @@ namespace SalesProjectTickets.Application.Services
             {
                 foreach (var error in resultValidation.Errors)
                 {
-                    throw new ValidationException($"{error.ErrorMessage}");
+                    throw new ValidationException(error.ErrorMessage);
                 }
             }
 

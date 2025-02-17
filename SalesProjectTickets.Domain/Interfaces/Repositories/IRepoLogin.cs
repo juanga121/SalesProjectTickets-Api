@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalesProjectTickets.Domain.Interfaces.Repositories
 {
-    public interface IRepoLogin<TEntity>
-    : ILoginUsers<TEntity>
+    public interface IRepoLogin<TEntity> : ILoginUsers<TEntity>
     {
     }
 }

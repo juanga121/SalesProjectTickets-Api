@@ -4,6 +4,7 @@ using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Enums;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
 using SalesProjectTickets.Infrastructure.Contexts;
+using System.ComponentModel.DataAnnotations;
 
 namespace SalesProjectTickets.Infrastructure.Repositories
 {
@@ -40,7 +41,7 @@ namespace SalesProjectTickets.Infrastructure.Repositories
                         Last_name = "",
                         Email = "",
                         Password = "",
-                        Permission = parsedPermissions
+                        Permissions = parsedPermissions
                     });
                 }
             }
@@ -50,7 +51,7 @@ namespace SalesProjectTickets.Infrastructure.Repositories
         public async Task<Users> SelectionById(Guid entityID)
         {
             Users? user = await _context.Users.FirstOrDefaultAsync(user => user.Id == entityID);
-            return user ?? throw new Exception("No se encontro el usuario");
+            return user ?? throw new ValidationException("No se encontro el usuario");
         }
 
         public async Task<Users?> UserExisting(Users entity)

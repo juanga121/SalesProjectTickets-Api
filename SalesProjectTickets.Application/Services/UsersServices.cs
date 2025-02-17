@@ -26,7 +26,7 @@ namespace SalesProjectTickets.Application.Services
             {
                 foreach (var error in resultValidation.Errors)
                 {
-                    throw new ValidationException($"{error.ErrorMessage}");
+                    throw new ValidationException(error.ErrorMessage);
                 }
             }
 
@@ -38,15 +38,15 @@ namespace SalesProjectTickets.Application.Services
                 throw new ValidationException(MessagesError.MESSAGES_EXISTING_USER);
             }
 
-            var userPermissions = await reposBase.ProviderToken(entity.Permission);
+            var userPermissions = await reposBase.ProviderToken(entity.Permissions);
 
-            if (userPermissions?.Permission == Permissions.SuperUsuario)
+            if (userPermissions?.Permissions == Permissions.SuperUsuario)
             {
-                entity.Permission = Permissions.Administrador;
+                entity.Permissions = Permissions.Administrador;
             }
             else
             {
-                entity.Permission = Permissions.Consumidor;
+                entity.Permissions = Permissions.Consumidor;
             }
 
             await reposBase.Add(entity);

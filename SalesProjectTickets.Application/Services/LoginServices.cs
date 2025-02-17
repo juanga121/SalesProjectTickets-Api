@@ -2,11 +2,7 @@
 using SalesProjectTickets.Application.Shared;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace SalesProjectTickets.Application.Services
 {
@@ -17,7 +13,7 @@ namespace SalesProjectTickets.Application.Services
         public async Task<LoginUsers?> Login(LoginUsers entity)
         {
             var userExisting = await repoLogin.Verify(entity);
-            return userExisting ?? throw new Exception(MessagesError.MESSAGES_VERIFY_USER);
+            return userExisting ?? throw new ValidationException(MessagesError.MESSAGES_VERIFY_USER);
         }
 
         public async Task<LoginUsers?> Verify(LoginUsers loginUsers)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalesProjectTickets.Domain.Interfaces
 {
-    public interface IEdit<TEntity>
+    public interface IEdit<in TEntity>
     {
         public Task Edit(TEntity entity);
     }

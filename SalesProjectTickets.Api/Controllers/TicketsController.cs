@@ -50,7 +50,7 @@ namespace SalesProjectTickets.Api.Controllers
         public async Task<IActionResult> EditTickets(Guid id_ticket, Tickets tickets)
         {
             var services = AddTicketsServices();
-            tickets.Id_ticket = id_ticket;
+            tickets.Id = id_ticket;
             await services.Edit(tickets);
             return Ok("Actualizado exitosamente");
         }

@@ -21,7 +21,7 @@ namespace SalesProjectTickets.Infrastructure.Repositories
 
         public async Task Delete(Guid entityID)
         {
-            var TickestForDelete = await _context.Tickets.FirstOrDefaultAsync(tickets => tickets.Id_ticket == entityID);
+            var TickestForDelete = await _context.Tickets.FirstOrDefaultAsync(tickets => tickets.Id == entityID);
             if (TickestForDelete != null)
             {
                 _context.Tickets.Remove(TickestForDelete);
@@ -31,7 +31,7 @@ namespace SalesProjectTickets.Infrastructure.Repositories
 
         public async Task Edit(Tickets entity)
         {
-            var TickestForEdit = await _context.Tickets.FirstOrDefaultAsync(tickets => tickets.Id_ticket == entity.Id_ticket);
+            var TickestForEdit = await _context.Tickets.FirstOrDefaultAsync(tickets => tickets.Id == entity.Id);
             if (TickestForEdit != null)
             {
                 TickestForEdit.Name = entity.Name;

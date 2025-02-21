@@ -1,15 +1,11 @@
 ﻿using FluentValidation;
+using SalesProjectTickets.Application.Exceptions;
 using SalesProjectTickets.Application.Interfaces;
 using SalesProjectTickets.Application.Shared;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Enums;
-using SalesProjectTickets.Domain.Interfaces;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SalesProjectTickets.Application.Services
 {
@@ -24,10 +20,11 @@ namespace SalesProjectTickets.Application.Services
 
             if (!resultValidation.IsValid)
             {
-                foreach (var error in resultValidation.Errors)
-                {
-                    throw new ValidationException(error.ErrorMessage);
-                }
+                var errors = resultValidation.Errors
+                    .Select(error => new ValidationsError(error.PropertyName, error.ErrorMessage))
+                    .ToList();
+
+                throw new PersonalExceptions(errors);
             }
 
             entity.Creation_date = DateOnly.FromDateTime(DateTime.Now);

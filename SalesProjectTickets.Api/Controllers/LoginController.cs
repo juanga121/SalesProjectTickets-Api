@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using SalesProjectTickets.Application.Interfaces;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Infrastructure.Provider;

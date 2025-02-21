@@ -28,7 +28,6 @@
     <ProjectReference Include="..\SalesProjectTickets.Application\SalesProjectTickets.Application.csproj" />
     <ProjectReference Include="..\SalesProjectTickets.Domain\SalesProjectTickets.Domain.csproj" />
     <ProjectReference Include="..\SalesProjectTickets.Infrastructure\SalesProjectTickets.Infrastructure.csproj" />
-    <ProjectReference Include="..\SalesProjectTickets.Tests\SalesProjectTickets.Tests.csproj" />
   </ItemGroup>
 
 </Project>

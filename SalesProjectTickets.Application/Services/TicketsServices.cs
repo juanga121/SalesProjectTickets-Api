@@ -22,10 +22,11 @@ namespace SalesProjectTickets.Application.Services
             var resultValidation = _validator.Validate(entity);
             if (!resultValidation.IsValid)
             {
-                foreach (var error in resultValidation.Errors)
-                {
-                    throw new ValidationException(error.ErrorMessage);
-                }
+                var errors = resultValidation.Errors
+                    .Select(error => error.ErrorMessage)
+                    .ToList();
+
+                throw new ValidationException(string.Join("; ", errors));
             }
 
             entity.State = State.Disponible;

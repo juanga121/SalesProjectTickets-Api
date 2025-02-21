@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
+using SalesProjectTickets.Application.Exceptions;
 using SalesProjectTickets.Application.Services;
-using SalesProjectTickets.Application.Shared;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Infrastructure.Contexts;
 using SalesProjectTickets.Infrastructure.Repositories;
@@ -41,6 +40,10 @@ namespace SalesProjectTickets.Api.Controllers
             catch (ValidationException ex)
             {
                 return BadRequest(new { message = ex.Message });
+            }
+            catch (PersonalExceptions ex)
+            {
+                return BadRequest(new { errors = ex.Errors });
             }
         }
 

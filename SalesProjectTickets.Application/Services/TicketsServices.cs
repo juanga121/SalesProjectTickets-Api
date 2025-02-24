@@ -1,14 +1,10 @@
 ﻿using FluentValidation;
+using SalesProjectTickets.Application.Exceptions;
 using SalesProjectTickets.Application.Interfaces;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Enums;
-using SalesProjectTickets.Domain.Interfaces;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SalesProjectTickets.Application.Services
 {
@@ -23,10 +19,10 @@ namespace SalesProjectTickets.Application.Services
             if (!resultValidation.IsValid)
             {
                 var errors = resultValidation.Errors
-                    .Select(error => error.ErrorMessage)
+                    .Select(error => new ValidationsError(error.PropertyName, error.ErrorMessage))
                     .ToList();
 
-                throw new ValidationException(string.Join("; ", errors));
+                throw new PersonalExceptions(errors);
             }
 
             entity.State = State.Disponible;
@@ -34,7 +30,7 @@ namespace SalesProjectTickets.Application.Services
             return entity;
         }
 
-        private async Task ChangeState()
+        public async Task ChangeState()
         {
             var allTickets = await _repoTickets.ListAllTickets();
             foreach (var ticket in allTickets)

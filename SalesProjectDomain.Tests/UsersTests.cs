@@ -7,7 +7,7 @@ using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Enums;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
 
-namespace SalesProjectDomain.Tests
+namespace SalesProjectApplication.Tests
 {
     public class UsersTests
     {
@@ -29,7 +29,7 @@ namespace SalesProjectDomain.Tests
             {
                 Id = Guid.NewGuid(),
                 Identity_type = Identity.CedulaCiudadania,
-                Document_identity = 123456789,
+                Document_identity = 1234567892,
                 Name = "Juan Pablo 2",
                 Last_name = "Giraldo Atehortua",
                 Email = "juanpaj542@gmail.com",
@@ -38,16 +38,17 @@ namespace SalesProjectDomain.Tests
                 Creation_date = DateOnly.FromDateTime(DateTime.Now)
             };
 
-            var validationsFailures = new List<FluentValidation.Results.ValidationFailure>
+            var validationsFailures = new List<ValidationFailure>
             {
                 new("Name", "El nombre solo puede contener letras")
             };
 
-            _mockValidator.Setup(x => x.Validate(invalidInfo)).Returns(new FluentValidation.Results.ValidationResult(validationsFailures));
+            _mockValidator.Setup(x => x.Validate(invalidInfo)).Returns(new ValidationResult(validationsFailures));
 
             var exception = await Assert.ThrowsAsync<PersonalExceptions>(async () => await _userServices.Add(invalidInfo));
 
-            Assert.Contains("El nombre solo puede contener letras", exception.Message);
+            Assert.Equal("Error de validación", exception.Message);
+            Assert.Contains(exception.Errors, e => e.PropertyName == "Name" && e.ErrorMessage == "El nombre solo puede contener letras");
         }
 
         [Fact]
@@ -125,6 +126,81 @@ namespace SalesProjectDomain.Tests
 
             Assert.NotNull(result);
             Assert.Equal(user.Permissions, result.Permissions);
+        }
+
+        [Fact]
+        public async Task ListAll()
+        {
+            var users = new List<Users>
+            {
+                new() {
+                    Id = Guid.NewGuid(),
+                    Identity_type = Identity.CedulaCiudadania,
+                    Document_identity = 1234567892,
+                    Name = "Juan Pablo",
+                    Last_name = "Giraldo Atehortua",
+                    Email = "juanpaj542@gmail.com",
+                    Password = "JuanP12#",
+                    Permissions = Permissions.Administrador,
+                    Creation_date = DateOnly.FromDateTime(DateTime.Now)
+                },
+                new() {
+                    Id = Guid.NewGuid(),
+                    Identity_type = Identity.CedulaCiudadania,
+                    Document_identity = 1234567892,
+                    Name = "Juan David",
+                    Last_name = "Arazcuta",
+                    Email = "arazx2@gmail.com",
+                    Password = "Araxcv12#",
+                    Permissions = Permissions.Administrador,
+                    Creation_date = DateOnly.FromDateTime(DateTime.Now)
+                }
+            };
+
+            _mockRepo.Setup(x => x.ListAll()).ReturnsAsync(users);
+
+            var result = await _userServices.ListAll();
+
+            Assert.NotNull(result);
+            Assert.Equal(users.Count, result.Count);
+        }
+
+        [Fact]
+        public async Task ProviderToken()
+        {
+            var user = new Users
+            {
+                Name = "",
+                Last_name = "",
+                Email = "",
+                Password = "",
+                Permissions = Permissions.SuperUsuario
+            };
+
+            _mockRepo.Setup(x => x.ProviderToken(user.Permissions)).ReturnsAsync(user);
+
+            var result = await _userServices.ProviderToken(user.Permissions);
+
+            Assert.NotNull(result);
+            Assert.Contains("SuperUsuario", result.Permissions.ToString());
+        }
+
+        [Fact]
+        public async Task UserExisting()
+        {
+            var user = new Users
+            {
+                Name = "Juan Pablo",
+                Last_name = "Giraldo Atehortua",
+                Email = "juanpaj12@gmail.com",
+                Password = "JuanP12#"
+            };
+
+            _mockRepo.Setup(x => x.UserExisting(user)).ReturnsAsync(user);
+
+            var result = await _userServices.UserExisting(user);
+
+            Assert.Equal(user, result);
         }
     }
 }

@@ -6,8 +6,7 @@ namespace SalesProjectTickets.Application.Exceptions
     {
         public List<ValidationsError> Errors { get; }
 
-        public PersonalExceptions(List<ValidationsError> validationsErrors)
-            : base("Validation failed")
+        public PersonalExceptions(List<ValidationsError> validationsErrors) : base("Error de validación")
         {
             Errors = validationsErrors;
         }

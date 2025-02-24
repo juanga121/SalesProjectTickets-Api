@@ -12,7 +12,6 @@ namespace SalesProjectTickets.Domain.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        public Permissions Permissions { get; set; }
         public DateOnly Creation_date { get; set; }
 
         public EntityBase()

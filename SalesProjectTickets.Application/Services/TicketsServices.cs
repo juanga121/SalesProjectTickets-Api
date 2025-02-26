@@ -8,9 +8,9 @@ using SalesProjectTickets.Domain.Interfaces.Repositories;
 
 namespace SalesProjectTickets.Application.Services
 {
-    public class TicketsServices(IRepoTickets<Tickets, Guid, Permissions> repoTickets, IValidator<Tickets> validator) : IServiceTickets<Tickets, Guid, Permissions>
+    public class TicketsServices(IRepoTickets<Tickets> repoTickets, IValidator<Tickets> validator) : IServiceTickets<Tickets>
     {
-        private readonly IRepoTickets<Tickets, Guid, Permissions> _repoTickets = repoTickets;
+        private readonly IRepoTickets<Tickets> _repoTickets = repoTickets;
         private readonly IValidator<Tickets> _validator = validator;
 
         public async Task<Tickets> Add(Tickets entity)
@@ -22,7 +22,7 @@ namespace SalesProjectTickets.Application.Services
                     .Select(error => new ValidationsError(error.PropertyName, error.ErrorMessage))
                     .ToList();
 
-                throw new PersonalExceptions(errors);
+                throw new PersonalException(errors);
             }
 
             entity.State = State.Disponible;
@@ -69,9 +69,9 @@ namespace SalesProjectTickets.Application.Services
             return alltickets.Where(tickets => tickets.State == State.Disponible).ToList();
         }
 
-        public async Task<bool> ListByPermissions(Permissions permissions)
+        public async Task<bool> ListByPermissions(Permissions entityPermi)
         {
-            if (permissions == Permissions.Administrador || permissions == Permissions.Consumidor)
+            if (entityPermi == Permissions.Administrador || entityPermi == Permissions.Consumidor)
             {
                 return await Task.FromResult(true);
             }

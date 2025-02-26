@@ -9,9 +9,9 @@ using SalesProjectTickets.Domain.Interfaces.Repositories;
 
 namespace SalesProjectTickets.Application.Services
 {
-    public class UsersServices(IRepoUsers<Users, Guid, Permissions> _repoUser, IValidator<Users> validator) : IServiceUsers<Users, Guid, Permissions>
+    public class UsersServices(IRepoUsers<Users> _repoUser, IValidator<Users> validator) : IServiceUsers<Users>
     {
-        private readonly IRepoUsers<Users, Guid, Permissions> reposBase = _repoUser;
+        private readonly IRepoUsers<Users> reposBase = _repoUser;
         private readonly IValidator<Users> validations = validator;
 
         public async Task<Users> Add(Users entity)
@@ -24,7 +24,7 @@ namespace SalesProjectTickets.Application.Services
                     .Select(error => new ValidationsError(error.PropertyName, error.ErrorMessage))
                     .ToList();
 
-                throw new PersonalExceptions(errors);
+                throw new PersonalException(errors);
             }
 
             entity.Creation_date = DateOnly.FromDateTime(DateTime.Now);
@@ -55,9 +55,9 @@ namespace SalesProjectTickets.Application.Services
             return await reposBase.ListAll();
         }
 
-        public async Task<Users?> ProviderToken(Permissions entity)
+        public async Task<Users?> ProviderToken(Permissions entityPermi)
         {
-            return await reposBase.ProviderToken(entity);
+            return await reposBase.ProviderToken(entityPermi);
         }
 
         public async Task<Users> SelectionById(Guid entityID)

@@ -1,4 +1,5 @@
-﻿C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Interfaces\IServiceLogin.cs
+﻿C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Exceptions\PersonalExceptions.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Interfaces\IServiceLogin.cs
 C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Interfaces\IServiceTickets.cs
 C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Interfaces\IServiceUsers.cs
 C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Application\Services\LoginServices.cs

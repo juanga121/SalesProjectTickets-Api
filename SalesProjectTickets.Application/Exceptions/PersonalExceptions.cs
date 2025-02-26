@@ -2,11 +2,11 @@
 
 namespace SalesProjectTickets.Application.Exceptions
 {
-    public class PersonalExceptions : Exception
+    public class PersonalException : Exception
     {
         public List<ValidationsError> Errors { get; }
 
-        public PersonalExceptions(List<ValidationsError> validationsErrors) : base("Error de validación")
+        public PersonalException(List<ValidationsError> validationsErrors) : base("Error de validación")
         {
             Errors = validationsErrors;
         }

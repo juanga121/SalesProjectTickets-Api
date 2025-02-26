@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SalesProjectTickets.Infrastructure.Repositories
 {
-    public class UserRepos(ContextsDaBa context, IHttpContextAccessor httpContextAccessor) : IRepoUsers<Users, Guid, Permissions>
+    public class UserRepos(ContextsDaBa context, IHttpContextAccessor httpContextAccessor) : IRepoUsers<Users>
     {
         private readonly ContextsDaBa _context = context;
         private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
@@ -25,7 +25,7 @@ namespace SalesProjectTickets.Infrastructure.Repositories
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<Users?> ProviderToken(Permissions permissions)
+        public async Task<Users?> ProviderToken(Permissions entityPermi)
         {
             var user = _httpContextAccessor.HttpContext?.User;
 

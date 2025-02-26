@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SalesProjectTickets.Domain.Interfaces
 {
-    public interface IDelete<in TEntityID>
+    public interface IDelete
     {
-        public Task Delete(TEntityID entityID);
+        public Task Delete(Guid entityID);
     }
 }

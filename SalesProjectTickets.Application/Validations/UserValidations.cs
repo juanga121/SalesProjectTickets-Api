@@ -24,7 +24,7 @@ namespace SalesProjectTickets.Application.Validations
                 .EmailAddress().WithMessage(MessagesError.MESSAGES_INVALID_EMAIL);
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage(MessagesError.MESSAGES_REQUERID_PASSWORD)
-                .Matches(ConstantsUser.PASSWORD_EXPRESSIONS);
+                .Matches(ConstantsUser.PASS_PATTERN);
         }
     }
 }

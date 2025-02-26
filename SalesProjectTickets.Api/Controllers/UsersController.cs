@@ -41,7 +41,7 @@ namespace SalesProjectTickets.Api.Controllers
             {
                 return BadRequest(new { message = ex.Message });
             }
-            catch (PersonalExceptions ex)
+            catch (PersonalException ex)
             {
                 return BadRequest(new { errors = ex.Errors });
             }

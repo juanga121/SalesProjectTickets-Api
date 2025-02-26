@@ -11,13 +11,13 @@ namespace SalesProjectApplication.Tests
 {
     public class UsersTests
     {
-        private readonly Mock<IRepoUsers<Users, Guid, Permissions>> _mockRepo;
+        private readonly Mock<IRepoUsers<Users>> _mockRepo;
         private readonly Mock<IValidator<Users>> _mockValidator;
         private readonly UsersServices _userServices;
 
         public UsersTests()
         {
-            _mockRepo = new Mock<IRepoUsers<Users, Guid, Permissions>>();
+            _mockRepo = new Mock<IRepoUsers<Users>>();
             _mockValidator = new Mock<IValidator<Users>>();
             _userServices = new UsersServices(_mockRepo.Object, _mockValidator.Object);
         }
@@ -45,7 +45,7 @@ namespace SalesProjectApplication.Tests
 
             _mockValidator.Setup(x => x.Validate(invalidInfo)).Returns(new ValidationResult(validationsFailures));
 
-            var exception = await Assert.ThrowsAsync<PersonalExceptions>(async () => await _userServices.Add(invalidInfo));
+            var exception = await Assert.ThrowsAsync<PersonalException>(async () => await _userServices.Add(invalidInfo));
 
             Assert.Equal("Error de validación", exception.Message);
             Assert.Contains(exception.Errors, e => e.PropertyName == "Name" && e.ErrorMessage == "El nombre solo puede contener letras");

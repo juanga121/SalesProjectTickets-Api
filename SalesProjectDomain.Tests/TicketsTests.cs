@@ -6,23 +6,18 @@ using SalesProjectTickets.Application.Services;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Enums;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SalesProjectApplication.Tests
 {
     public class TicketsTests
     {
-        private readonly Mock<IRepoTickets<Tickets, Guid, Permissions>> _mockRepo;
+        private readonly Mock<IRepoTickets<Tickets>> _mockRepo;
         private readonly Mock<IValidator<Tickets>> _mockValidator;
         private readonly TicketsServices _ticketsServices;
 
         public TicketsTests()
         {
-            _mockRepo = new Mock<IRepoTickets<Tickets, Guid, Permissions>>();
+            _mockRepo = new Mock<IRepoTickets<Tickets>>();
             _mockValidator = new Mock<IValidator<Tickets>>();
             _ticketsServices = new TicketsServices(_mockRepo.Object, _mockValidator.Object);
         }
@@ -49,7 +44,7 @@ namespace SalesProjectApplication.Tests
 
             _mockValidator.Setup(x => x.Validate(invalidInfo)).Returns(new ValidationResult(validationsFailures));
 
-            var exception = await Assert.ThrowsAsync<PersonalExceptions>(async () => await _ticketsServices.Add(invalidInfo));
+            var exception = await Assert.ThrowsAsync<PersonalException>(async () => await _ticketsServices.Add(invalidInfo));
 
             Assert.Equal("Error de validación", exception.Message);
             Assert.Contains(exception.Errors, e => e.PropertyName == "Name" && e.ErrorMessage == "El nombre debe tener entre 3 a 50 caracteres");

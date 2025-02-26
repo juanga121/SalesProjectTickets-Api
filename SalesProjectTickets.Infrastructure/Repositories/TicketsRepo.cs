@@ -7,7 +7,7 @@ using SalesProjectTickets.Infrastructure.Contexts;
 
 namespace SalesProjectTickets.Infrastructure.Repositories
 {
-    public class TicketsRepo(ContextsDaBa context, IHttpContextAccessor httpContextAccessor) : IRepoTickets<Tickets, Guid, Permissions>
+    public class TicketsRepo(ContextsDaBa context, IHttpContextAccessor httpContextAccessor) : IRepoTickets<Tickets>
     {
         private readonly ContextsDaBa _context = context;
         private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
@@ -51,13 +51,13 @@ namespace SalesProjectTickets.Infrastructure.Repositories
             return await _context.Tickets.ToListAsync();
         }
 
-        public async Task<bool> ListByPermissions(Permissions permissions)
+        public async Task<bool> ListByPermissions(Permissions entityPermi)
         {
             var user = _httpContextAccessor.HttpContext?.User;
 
             var permissionsClaim = user?.Claims.FirstOrDefault(c => c.Type == "Permissions");
 
-            return await Task.FromResult(permissions switch
+            return await Task.FromResult(entityPermi switch
             {
                 Permissions.Administrador => permissionsClaim?.Value == "Administrador",
                 Permissions.Consumidor => permissionsClaim?.Value == "Consumidor",

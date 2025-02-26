@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SalesProjectTickets.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace SalesProjectTickets.Domain.Interfaces
 {
-    public interface IList<TEntity, TEntityID, TEntityPermi>
+    public interface IList<TEntity>
     {
         public Task<List<TEntity>> ListAll();
 
-        public Task<TEntity> SelectionById(TEntityID entityID);
+        public Task<TEntity> SelectionById(Guid entityID);
 
-        public Task<TEntity?> ProviderToken(TEntityPermi entity);
+        public Task<TEntity?> ProviderToken(Permissions entityPermi);
 
         public Task<TEntity?> UserExisting(TEntity entity);
     }
-    public interface IListTickets<TEntity, TEntityPermi>
+    public interface IListTickets<TEntity>
     {
         public Task<List<TEntity>> ListAllTickets();
 
-        public Task<bool> ListByPermissions(TEntityPermi entity);
+        public Task<bool> ListByPermissions(Permissions entityPermi);
     }
 }

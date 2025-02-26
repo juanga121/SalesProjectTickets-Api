@@ -2,6 +2,7 @@
 C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Domain\Entities\LoginUsers.cs
 C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Domain\Entities\Tickets.cs
 C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Domain\Entities\Users.cs
+C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Domain\Entities\ValidationsError.cs
 C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Domain\Enums\Identity.cs
 C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Domain\Enums\Permissions.cs
 C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectTickets.Domain\Enums\State.cs

@@ -9,7 +9,7 @@ namespace SalesProjectTickets.Application.Shared
     public static class ConstantsUser
     {
         public const string ONLY_LETTERS = "^[a-zA-ZáéíóúÁÉÍÓÚ ]*$";
-        // Minimo ocho y maximo 15 caracteres, al menos una letra mayuscula, una letra minuscula, un numero y un caracter especial
-        public const string PASSWORD_EXPRESSIONS = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,15}$";
+        // Minimo ocho caracteres, al menos una letra mayuscula, una letra minuscula, un numero y un caracter especial
+        public const string PASS_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$";
     }
 }

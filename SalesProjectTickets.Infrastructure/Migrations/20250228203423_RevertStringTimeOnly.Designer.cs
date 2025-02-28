@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesProjectTickets.Infrastructure.Contexts;
 
@@ -11,9 +12,11 @@ using SalesProjectTickets.Infrastructure.Contexts;
 namespace SalesProjectTickets.Infrastructure.Migrations
 {
     [DbContext(typeof(ContextsDaBa))]
-    partial class ContextsDaBaModelSnapshot : ModelSnapshot
+    [Migration("20250228203423_RevertStringTimeOnly")]
+    partial class RevertStringTimeOnly
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +45,8 @@ namespace SalesProjectTickets.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Event_time")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<TimeOnly>("Event_time")
+                        .HasColumnType("time");
 
                     b.Property<string>("Name")
                         .IsRequired()

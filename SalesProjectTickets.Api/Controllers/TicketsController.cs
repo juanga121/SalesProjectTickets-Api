@@ -5,6 +5,7 @@ using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Application.Services;
 using SalesProjectTickets.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using SalesProjectTickets.Application.Exceptions;
 
 namespace SalesProjectTickets.Api.Controllers
 {
@@ -30,10 +31,22 @@ namespace SalesProjectTickets.Api.Controllers
         [Authorize(Policy = "Administrador")]
         public async Task<IActionResult> AddTickets(Tickets tickets)
         {
-            var services = AddTicketsServices();
-            await services.Add(tickets);
+            try
+            {
+                var services = AddTicketsServices();
+                await services.Add(tickets);
 
-            return Ok("Ticket agregado con exito");
+                return Ok(new { message = "Ticket agregado exitosamente" });
+
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(new { errors = ex.Errors} );
+            }
+            catch (PersonalException ex)
+            {
+                return BadRequest(new { errors = ex.Errors });
+            }
         }
 
         [HttpGet]

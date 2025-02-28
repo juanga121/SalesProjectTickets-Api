@@ -33,7 +33,7 @@ namespace SalesProjectApplication.Tests
                 Price = 50000,
                 Event_date = DateOnly.FromDateTime(DateTime.Now),
                 Event_location = "Estadio",
-                Event_time = TimeOnly.FromDateTime(DateTime.Now),
+                Event_time = "12:00",
                 State = State.Disponible
             };
 
@@ -61,7 +61,7 @@ namespace SalesProjectApplication.Tests
                 Price = 50000,
                 Event_date = DateOnly.FromDateTime(DateTime.Now),
                 Event_location = "Estadio",
-                Event_time = TimeOnly.FromDateTime(DateTime.Now),
+                Event_time = "12:00",
                 State = State.Disponible
             };
             _mockValidator.Setup(x => x.Validate(validInfo)).Returns(new ValidationResult());
@@ -109,7 +109,7 @@ namespace SalesProjectApplication.Tests
                     Price = 50000,
                     Event_date = DateOnly.FromDateTime(DateTime.Now.AddDays(-1)),
                     Event_location = "Estadio",
-                    Event_time = TimeOnly.FromDateTime(DateTime.Now),
+                    Event_time = "12:00",
                     State = State.Disponible
                 },
                 new()
@@ -120,7 +120,7 @@ namespace SalesProjectApplication.Tests
                     Price = 50000,
                     Event_date = DateOnly.FromDateTime(DateTime.Now.AddDays(-2)),
                     Event_location = "Estadio",
-                    Event_time = TimeOnly.FromDateTime(DateTime.Now),
+                    Event_time = "12:00",
                     State = State.Disponible
                 }
             };
@@ -145,7 +145,7 @@ namespace SalesProjectApplication.Tests
                     Price = 50000,
                     Event_date = DateOnly.FromDateTime(DateTime.Now),
                     Event_location = "Estadio",
-                    Event_time = TimeOnly.FromDateTime(DateTime.Now),
+                    Event_time = "12:00",
                     State = State.Disponible
                 },
                 new()
@@ -156,7 +156,7 @@ namespace SalesProjectApplication.Tests
                     Price = 50000,
                     Event_date = DateOnly.FromDateTime(DateTime.Now),
                     Event_location = "Estadio",
-                    Event_time = TimeOnly.FromDateTime(DateTime.Now),
+                    Event_time = "12:00",
                     State = State.Expirado
                 }
             };
@@ -183,7 +183,7 @@ namespace SalesProjectApplication.Tests
                     Price = 50000,
                     Event_date = DateOnly.FromDateTime(DateTime.Now),
                     Event_location = "Estadio",
-                    Event_time = TimeOnly.FromDateTime(DateTime.Now),
+                    Event_time = "12:00",
                     State = State.Disponible
                 },
                 new()
@@ -194,7 +194,7 @@ namespace SalesProjectApplication.Tests
                     Price = 50000,
                     Event_date = DateOnly.FromDateTime(DateTime.Now.AddDays(-2)),
                     Event_location = "Estadio",
-                    Event_time = TimeOnly.FromDateTime(DateTime.Now),
+                    Event_time = "12:00",
                     State = State.Disponible
                 }
             };

@@ -1,10 +1,4 @@
 ﻿using SalesProjectTickets.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SalesProjectTickets.Domain.Entities
 {
@@ -16,10 +10,10 @@ namespace SalesProjectTickets.Domain.Entities
         public decimal Price { get; set; }
         public DateOnly Event_date { get; set; }
         public required string Event_location { get; set; }
-        public TimeOnly Event_time { get; set; }
+        public required string Event_time { get; set; }
         public State State { get; set; }
 
-        public static Tickets Create(string name, string description, int quantity, decimal price, string event_location, State state)
+        public static Tickets Create(string name, string description, int quantity, decimal price, string event_location, string event_time, State state)
         {
             return new Tickets
             {
@@ -29,6 +23,7 @@ namespace SalesProjectTickets.Domain.Entities
                 Price = price,
                 Event_date = DateOnly.FromDateTime(DateTime.Now),
                 Event_location = event_location,
+                Event_time = event_time,
                 State = state
             };
         }

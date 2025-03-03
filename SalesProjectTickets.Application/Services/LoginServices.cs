@@ -13,7 +13,7 @@ namespace SalesProjectTickets.Application.Services
         public async Task<LoginUsers?> Login(LoginUsers entity)
         {
             var userExisting = await repoLogin.Verify(entity);
-            return userExisting ?? throw new ValidationException(MessagesError.MESSAGES_VERIFY_USER);
+            return userExisting ?? throw new ValidationException(MessagesCentral.MESSAGES_VERIFY_USER);
         }
 
         public async Task<LoginUsers?> Verify(LoginUsers loginUsers)

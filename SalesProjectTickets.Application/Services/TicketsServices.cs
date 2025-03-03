@@ -78,5 +78,10 @@ namespace SalesProjectTickets.Application.Services
 
             return await Task.FromResult(false);
         }
+
+        public Task<Tickets> SelectionById(Guid entity)
+        {
+            return _repoTickets.SelectionById(entity);
+        }
     }
 }

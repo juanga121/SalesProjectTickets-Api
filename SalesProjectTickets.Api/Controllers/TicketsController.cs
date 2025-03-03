@@ -65,7 +65,7 @@ namespace SalesProjectTickets.Api.Controllers
             var services = AddTicketsServices();
             tickets.Id = id_ticket;
             await services.Edit(tickets);
-            return Ok("Actualizado exitosamente");
+            return Ok(new { message = "Ticket actualizado exitosamente" });
         }
 
         [HttpDelete("{id}")]
@@ -74,7 +74,15 @@ namespace SalesProjectTickets.Api.Controllers
         {
             var services = AddTicketsServices();
             await services.Delete(id);
-            return Ok("Eliminado con exito");
+            return Ok(new { message =  "Eliminado con exito" });
+        }
+
+        [HttpGet("{id}")]
+        [Authorize(Policy = "Administrador")]
+        public async Task<ActionResult<Users>> Get(Guid id)
+        {
+            var service = AddTicketsServices();
+            return Ok(await service.SelectionById(id));
         }
     }
 }

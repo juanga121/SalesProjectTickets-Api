@@ -20,6 +20,7 @@ namespace SalesProjectTickets.Domain.Interfaces
     public interface IListTickets<TEntity>
     {
         public Task<List<TEntity>> ListAllTickets();
+        public Task<TEntity> SelectionById(Guid entity);
 
         public Task<bool> ListByPermissions(Permissions entityPermi);
     }

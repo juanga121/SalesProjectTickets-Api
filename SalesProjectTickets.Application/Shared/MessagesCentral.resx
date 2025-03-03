@@ -121,67 +121,28 @@
     <value>El usuario ya existe, verifique su correo y documento</value>
   </data>
   <data name="MESSAGES_GREATER_THAN_DATE" xml:space="preserve">
-    <value>La fecha tiene que ser a futuro, no se permite la fecha actual o menor </value>
+    <value>La fecha no debe ser menor o igual a la actual</value>
   </data>
   <data name="MESSAGES_GREATER_THAN_ZERO" xml:space="preserve">
-    <value>Tiene que ser mayor a 0, no se permiten negativos</value>
+    <value>Tiene que ser mayor a 0</value>
   </data>
   <data name="MESSAGES_INVALID_EMAIL" xml:space="preserve">
-    <value>El email no es válido</value>
+    <value>Correo electronico invalido </value>
   </data>
-  <data name="MESSAGES_LENGTH_DESCRIPTION" xml:space="preserve">
-    <value>La descripción debe tener entre 5 a 255 caracteres</value>
+  <data name="MESSAGES_LENGTH" xml:space="preserve">
+    <value>El campo permite maximo 100 caracteres</value>
   </data>
   <data name="MESSAGES_LENGTH_DOCUMENT" xml:space="preserve">
-    <value>El documento de identidad debe tener 10 digitos</value>
+    <value>El documento debe tener 10 digitos</value>
   </data>
-  <data name="MESSAGES_LENGTH_LASTNAME" xml:space="preserve">
-    <value>El apellido debe tener entre 3 a 50 caracteres</value>
+  <data name="MESSAGES_LENGTH_FIELDS" xml:space="preserve">
+    <value>El campo debe tener entre 3 y 50 caracteres</value>
   </data>
-  <data name="MESSAGES_LENGTH_LOCATION" xml:space="preserve">
-    <value>Maximo 255 caracteres</value>
+  <data name="MESSAGES_ONLY_LETTERS" xml:space="preserve">
+    <value>El campo solo admite letras</value>
   </data>
-  <data name="MESSAGES_LENGTH_NAME" xml:space="preserve">
-    <value>El nombre debe tener entre 3 a 50 caracteres</value>
-  </data>
-  <data name="MESSAGES_MINOR_DATE" xml:space="preserve">
-    <value>La fecha de creación no puede ser menor a la fecha actual</value>
-  </data>
-  <data name="MESSAGES_OLDER_DATE" xml:space="preserve">
-    <value>La fecha de creación no puede ser mayor a la fecha actual</value>
-  </data>
-  <data name="MESSAGES_ONLY_LETTERS_LASTNAME" xml:space="preserve">
-    <value>El apellido solo puede contener letras</value>
-  </data>
-  <data name="MESSAGES_ONLY_LETTERS_NAME" xml:space="preserve">
-    <value>El nombre solo puede contener letras</value>
-  </data>
-  <data name="MESSAGES_REQUERID_DESCRIPTION" xml:space="preserve">
-    <value>La descripción es requerida</value>
-  </data>
-  <data name="MESSAGES_REQUERID_DOCUMENT" xml:space="preserve">
-    <value>El documento de identidad es requerido</value>
-  </data>
-  <data name="MESSAGES_REQUERID_EMAIL" xml:space="preserve">
-    <value>El email es requerido</value>
-  </data>
-  <data name="MESSAGES_REQUERID_LASTNAME" xml:space="preserve">
-    <value>El apellido es requerido</value>
-  </data>
-  <data name="MESSAGES_REQUERID_LOCATION" xml:space="preserve">
-    <value>El lugar del evento es requerido</value>
-  </data>
-  <data name="MESSAGES_REQUERID_NAME" xml:space="preserve">
-    <value>El nombre es requerido</value>
-  </data>
-  <data name="MESSAGES_REQUERID_PASSWORD" xml:space="preserve">
-    <value>La contraseña es requerida</value>
-  </data>
-  <data name="MESSAGES_REQUERID_PRICE" xml:space="preserve">
-    <value>El precio es requerido</value>
-  </data>
-  <data name="MESSAGES_REQUERID_QUANTITY" xml:space="preserve">
-    <value>La cantidad es requerida</value>
+  <data name="MESSAGES_REQUERID_FIELDS" xml:space="preserve">
+    <value>El campo es requerido</value>
   </data>
   <data name="MESSAGES_VERIFY_USER" xml:space="preserve">
     <value>Usuario no enconrado o credenciales malas</value>

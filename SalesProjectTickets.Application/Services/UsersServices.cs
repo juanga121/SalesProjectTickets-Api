@@ -32,7 +32,7 @@ namespace SalesProjectTickets.Application.Services
             var userExisting = await reposBase.UserExisting(entity);
             if (userExisting != null)
             {
-                throw new ValidationException(MessagesError.MESSAGES_EXISTING_USER);
+                throw new ValidationException(MessagesCentral.MESSAGES_EXISTING_USER);
             }
 
             var userPermissions = await reposBase.ProviderToken(entity.Permissions);

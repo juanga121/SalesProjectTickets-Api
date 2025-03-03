@@ -9,21 +9,21 @@ namespace SalesProjectTickets.Application.Validations
         public UserValidations()
         {
             RuleFor(x => x.Document_identity)
-                .NotEmpty().WithMessage(MessagesError.MESSAGES_REQUERID_DOCUMENT)
-                .Must(id => id.ToString().Length == 10).WithMessage(MessagesError.MESSAGES_LENGTH_DOCUMENT);
+                .NotEmpty().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
+                .Must(id => id.ToString().Length == 10).WithMessage(MessagesCentral.MESSAGES_LENGTH_DOCUMENT);
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage(MessagesError.MESSAGES_REQUERID_NAME)
-                .Length(3, 50).WithMessage(MessagesError.MESSAGES_LENGTH_NAME)
-                .Matches(ConstantsUser.ONLY_LETTERS).WithMessage(MessagesError.MESSAGES_ONLY_LETTERS_NAME);
+                .NotEmpty().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
+                .Length(3, 50).WithMessage(MessagesCentral.MESSAGES_LENGTH_FIELDS)
+                .Matches(ConstantsUser.ONLY_LETTERS).WithMessage(MessagesCentral.MESSAGES_ONLY_LETTERS);
             RuleFor(x => x.Last_name)
-                .NotEmpty().WithMessage(MessagesError.MESSAGES_REQUERID_LASTNAME)
-                .Length(3, 50).WithMessage(MessagesError.MESSAGES_LENGTH_LASTNAME)
-                .Matches(ConstantsUser.ONLY_LETTERS).WithMessage(MessagesError.MESSAGES_ONLY_LETTERS_LASTNAME);
+                .NotEmpty().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
+                .Length(3, 50).WithMessage(MessagesCentral.MESSAGES_LENGTH_FIELDS)
+                .Matches(ConstantsUser.ONLY_LETTERS).WithMessage(MessagesCentral.MESSAGES_ONLY_LETTERS);
             RuleFor(x => x.Email)
-                .NotEmpty().WithMessage(MessagesError.MESSAGES_REQUERID_EMAIL)
-                .EmailAddress().WithMessage(MessagesError.MESSAGES_INVALID_EMAIL);
+                .NotEmpty().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
+                .EmailAddress().WithMessage(MessagesCentral.MESSAGES_INVALID_EMAIL);
             RuleFor(x => x.Password)
-                .NotEmpty().WithMessage(MessagesError.MESSAGES_REQUERID_PASSWORD)
+                .NotEmpty().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
                 .Matches(ConstantsUser.PASS_PATTERN);
         }
     }

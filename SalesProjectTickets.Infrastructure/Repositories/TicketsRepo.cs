@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Enums;
@@ -63,6 +64,12 @@ namespace SalesProjectTickets.Infrastructure.Repositories
                 Permissions.Consumidor => permissionsClaim?.Value == "Consumidor",
                 _ => false
             });
+        }
+
+        public async Task<Tickets> SelectionById(Guid entity)
+        {
+            var ticket = await _context.Tickets.FirstOrDefaultAsync(ticket => ticket.Id == entity);
+            return ticket ?? throw new ValidationException("No se encontro el ticket");
         }
     }
 }

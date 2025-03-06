@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace SalesProjectTickets.Domain.Interfaces.Repositories
 {
-    public interface IRepoTickets<TEntity>
-    : IAdd<TEntity>, IListTickets<TEntity>, IEdit<TEntity>, IDelete
+    public interface IRepoTickets<TEntity> : IAddTickets<TEntity>, IListTickets<TEntity>, IEditTickets<TEntity>, IDelete
     {
     }
 }

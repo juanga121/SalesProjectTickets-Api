@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalesProjectTickets.Domain.Interfaces.Repositories
 {
-    public interface IRepoUsers<TEntity>
-    : IAdd<TEntity>, IList<TEntity>
+    public interface IRepoUsers<TEntity> : IAdd<TEntity>, IList<TEntity>
     {
     }
 }

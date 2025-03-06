@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using SalesProjectTickets.Application.Exceptions;
 using SalesProjectTickets.Application.Interfaces;
 using SalesProjectTickets.Domain.Entities;
@@ -13,7 +14,7 @@ namespace SalesProjectTickets.Application.Services
         private readonly IRepoTickets<Tickets> _repoTickets = repoTickets;
         private readonly IValidator<Tickets> _validator = validator;
 
-        public async Task<Tickets> Add(Tickets entity)
+        public async Task<Tickets> Add(Tickets entity, IFormFile formFile)
         {
             var resultValidation = _validator.Validate(entity);
             if (!resultValidation.IsValid)
@@ -26,11 +27,11 @@ namespace SalesProjectTickets.Application.Services
             }
 
             entity.State = State.Disponible;
-            await _repoTickets.Add(entity);
+            await _repoTickets.Add(entity, formFile);
             return entity;
         }
 
-        public async Task ChangeState()
+        public async Task ChangeState(IFormFile formFile)
         {
             var allTickets = await _repoTickets.ListAllTickets();
             foreach (var ticket in allTickets)
@@ -38,7 +39,7 @@ namespace SalesProjectTickets.Application.Services
                 if (ticket.Event_date < DateOnly.FromDateTime(DateTime.Now))
                 {
                     ticket.State = State.Expirado;
-                    await _repoTickets.Edit(ticket);
+                    await _repoTickets.Edit(ticket, formFile);
                 }
             }
         }
@@ -48,14 +49,14 @@ namespace SalesProjectTickets.Application.Services
             await _repoTickets.Delete(entityID);
         }
 
-        public async Task Edit(Tickets entity)
+        public async Task Edit(Tickets entity, IFormFile formFile)
         {
-            await _repoTickets.Edit(entity);
+            await _repoTickets.Edit(entity, formFile);
         }
 
         public async Task<List<Tickets>> ListAllTickets()
         {
-            await ChangeState();
+            //await ChangeState();
 
             var alltickets = await _repoTickets.ListAllTickets();
 

@@ -12,6 +12,7 @@ namespace SalesProjectTickets.Domain.Entities
         public required string Event_location { get; set; }
         public required string Event_time { get; set; }
         public State State { get; set; }
+        public string? ImageUrl { get; set; }
 
         public static Tickets Create(string name, string description, int quantity, decimal price, string event_location, string event_time, State state)
         {

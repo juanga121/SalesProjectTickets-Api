@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SalesProjectTickets.Infrastructure.Contexts;
 using SalesProjectTickets.Api.Injections;
+using CloudinaryDotNet;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 Injections.ConfigureServices(builder.Services, builder.Configuration);
+
+var cloudiarySettings = builder.Configuration.GetSection("Cloudinary");
+
+var cloud = new Cloudinary(new Account(
+    cloudiarySettings["CloudName"],
+    cloudiarySettings["ApiKey"],
+    cloudiarySettings["ApiSecret"]
+));
+
+builder.Services.AddSingleton(cloud);
 
 var app = builder.Build();
 

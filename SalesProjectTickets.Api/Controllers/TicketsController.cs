@@ -6,22 +6,25 @@ using SalesProjectTickets.Application.Services;
 using SalesProjectTickets.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using SalesProjectTickets.Application.Exceptions;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 
 namespace SalesProjectTickets.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TicketsController(ContextsDaBa context, IValidator<Tickets> validator, IHttpContextAccessor httpContextAccessor) : ControllerBase
+    public class TicketsController(ContextsDaBa context, IValidator<Tickets> validator, IHttpContextAccessor httpContextAccessor, Cloudinary cloudinary) : ControllerBase
     {
         private readonly ContextsDaBa _context = context;
         private readonly IValidator<Tickets> _validator = validator;
         private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+        private readonly Cloudinary _cloudinary = cloudinary;
 
         TicketsServices AddTicketsServices()
         {
             var accessor = _httpContextAccessor;
             var contextDaBa = _context;
-            TicketsRepo ticketsRepo = new(contextDaBa, accessor);
+            TicketsRepo ticketsRepo = new(contextDaBa, accessor, _cloudinary);
             TicketsServices ticketsServices = new(ticketsRepo, _validator);
             return ticketsServices;
         }
@@ -29,19 +32,19 @@ namespace SalesProjectTickets.Api.Controllers
         [HttpPost]
         [Route("AddTickets")]
         [Authorize(Policy = "Administrador")]
-        public async Task<IActionResult> AddTickets(Tickets tickets)
+        public async Task<IActionResult> AddTickets([FromForm]Tickets tickets, IFormFile formFile)
         {
             try
             {
                 var services = AddTicketsServices();
-                await services.Add(tickets);
+                await services.Add(tickets, formFile);
 
                 return Ok(new { message = "Ticket agregado exitosamente" });
 
             }
             catch (ValidationException ex)
             {
-                return BadRequest(new { errors = ex.Errors} );
+                return BadRequest(new { errors = ex.Errors });
             }
             catch (PersonalException ex)
             {
@@ -58,13 +61,13 @@ namespace SalesProjectTickets.Api.Controllers
             return Ok(await services.ListAllTickets());
         }
 
-        [HttpPut("{id_ticket}")]
+        [HttpPut("{id}")]
         [Authorize(Policy = "Administrador")]
-        public async Task<IActionResult> EditTickets(Guid id_ticket, Tickets tickets)
+        public async Task<IActionResult> EditTickets(Guid id, [FromForm]Tickets tickets, IFormFile formFile)
         {
             var services = AddTicketsServices();
-            tickets.Id = id_ticket;
-            await services.Edit(tickets);
+            tickets.Id = id;
+            await services.Edit(tickets, formFile);
             return Ok(new { message = "Ticket actualizado exitosamente" });
         }
 
@@ -74,7 +77,7 @@ namespace SalesProjectTickets.Api.Controllers
         {
             var services = AddTicketsServices();
             await services.Delete(id);
-            return Ok(new { message =  "Eliminado con exito" });
+            return Ok(new { message = "Eliminado con exito" });
         }
 
         [HttpGet("{id}")]

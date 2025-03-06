@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SalesProjectTickets.Domain.Entities;
@@ -8,13 +10,34 @@ using SalesProjectTickets.Infrastructure.Contexts;
 
 namespace SalesProjectTickets.Infrastructure.Repositories
 {
-    public class TicketsRepo(ContextsDaBa context, IHttpContextAccessor httpContextAccessor) : IRepoTickets<Tickets>
+    public class TicketsRepo(ContextsDaBa context, IHttpContextAccessor httpContextAccessor, Cloudinary cloudinary) : IRepoTickets<Tickets>
     {
         private readonly ContextsDaBa _context = context;
         private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+        private readonly Cloudinary _cloudinary = cloudinary;
 
-        public async Task<Tickets> Add(Tickets entity)
+        public async Task<Tickets> Add(Tickets entity, IFormFile formFile)
         {
+            if (formFile == null || formFile.Length == 0)
+            {
+                throw new ValidationException("Imagen requerida");
+            }
+
+            var uploadsParams = new ImageUploadParams()
+            {
+                File = new FileDescription(formFile.FileName, formFile.OpenReadStream()),
+                AssetFolder = "ApiTicketsConciertos"
+            };
+
+            var uploadResult = await _cloudinary.UploadAsync(uploadsParams);
+
+            if (uploadResult == null || string.IsNullOrWhiteSpace(uploadResult.SecureUrl.ToString()))
+            {
+                throw new ValidationException("Error al subir la imagen");
+            }
+
+            entity.ImageUrl = uploadResult.SecureUrl.ToString();
+
             await _context.Tickets.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
@@ -30,9 +53,10 @@ namespace SalesProjectTickets.Infrastructure.Repositories
             }
         }
 
-        public async Task Edit(Tickets entity)
+        public async Task Edit(Tickets entity, IFormFile formFile)
         {
             var TickestForEdit = await _context.Tickets.FirstOrDefaultAsync(tickets => tickets.Id == entity.Id);
+
             if (TickestForEdit != null)
             {
                 TickestForEdit.Name = entity.Name;
@@ -42,7 +66,28 @@ namespace SalesProjectTickets.Infrastructure.Repositories
                 TickestForEdit.Event_date = entity.Event_date;
                 TickestForEdit.Event_location = entity.Event_location;
                 TickestForEdit.Event_time = entity.Event_time;
-                TickestForEdit.State = entity.State;
+
+                if (formFile == null || formFile.Length == 0)
+                {
+                    throw new ValidationException("Imagen requerida");
+                }
+
+                var uploadsParams = new ImageUploadParams()
+                {
+                    File = new FileDescription(formFile.FileName, formFile.OpenReadStream()),
+                    AssetFolder = "ApiTicketsConciertos"
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadsParams);
+
+                if (uploadResult == null || string.IsNullOrWhiteSpace(uploadResult.SecureUrl.ToString()))
+                {
+                    throw new ValidationException("Error al subir la imagen");
+                }
+
+                entity.ImageUrl = uploadResult.SecureUrl.ToString();
+
+                TickestForEdit.ImageUrl = entity.ImageUrl;
                 await _context.SaveChangesAsync();
             }
         }

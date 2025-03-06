@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SalesProjectTickets.Application.Interfaces
 {
     public interface IServiceTickets<TEntity>
-    : IAdd<TEntity>, IListTickets<TEntity>, IEdit<TEntity>, IDelete
+    : IAddTickets<TEntity>, IListTickets<TEntity>, IEditTickets<TEntity>, IDelete
     {
     }
 }

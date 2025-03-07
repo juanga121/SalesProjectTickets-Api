@@ -31,7 +31,7 @@ namespace SalesProjectTickets.Application.Services
             return entity;
         }
 
-        public async Task ChangeState(IFormFile formFile)
+        public async Task ChangeState()
         {
             var allTickets = await _repoTickets.ListAllTickets();
             foreach (var ticket in allTickets)
@@ -39,9 +39,18 @@ namespace SalesProjectTickets.Application.Services
                 if (ticket.Event_date < DateOnly.FromDateTime(DateTime.Now))
                 {
                     ticket.State = State.Expirado;
-                    await _repoTickets.Edit(ticket, formFile);
+                    await _repoTickets.ChangeStateByValidation(ticket);
+                } else
+                {
+                    ticket.State = State.Disponible;
+                    await _repoTickets.ChangeStateByValidation(ticket);
                 }
             }
+        }
+
+        public async Task ChangeStateByValidation(Tickets entity)
+        {
+            await _repoTickets.ChangeStateByValidation(entity);
         }
 
         public async Task Delete(Guid entityID)
@@ -49,14 +58,14 @@ namespace SalesProjectTickets.Application.Services
             await _repoTickets.Delete(entityID);
         }
 
-        public async Task Edit(Tickets entity, IFormFile formFile)
+        public async Task Edit(Tickets entity, IFormFile? formFile)
         {
             await _repoTickets.Edit(entity, formFile);
         }
 
         public async Task<List<Tickets>> ListAllTickets()
         {
-            //await ChangeState();
+            await ChangeState();
 
             var alltickets = await _repoTickets.ListAllTickets();
 

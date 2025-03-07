@@ -14,6 +14,6 @@ namespace SalesProjectTickets.Domain.Interfaces
 
     public interface IEditTickets<in TEntity>
     {
-        public Task Edit(TEntity entity, IFormFile formFile);
+        public Task Edit(TEntity entity, IFormFile? formFile);
     }
 }

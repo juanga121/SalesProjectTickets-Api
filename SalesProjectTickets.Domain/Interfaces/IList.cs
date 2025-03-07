@@ -23,5 +23,7 @@ namespace SalesProjectTickets.Domain.Interfaces
         public Task<TEntity> SelectionById(Guid entity);
 
         public Task<bool> ListByPermissions(Permissions entityPermi);
+
+        public Task ChangeStateByValidation(TEntity entity);
     }
 }

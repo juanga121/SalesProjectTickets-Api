@@ -1,1 +1,1 @@
-C:\Users\User\source\repos\SalesProjectTickets.Domain\.sonarqube\out\3
+C:\Users\User\source\repos\SalesProjectTickets-Api\.sonarqube\out\3

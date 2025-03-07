@@ -1,6 +1,6 @@
-﻿C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectDomain.Tests\LoginTests.cs
-C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectDomain.Tests\TicketsTests.cs
-C:\Users\User\source\repos\SalesProjectTickets.Domain\SalesProjectDomain.Tests\UsersTests.cs
+﻿C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectDomain.Tests\LoginTests.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectDomain.Tests\TicketsTests.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectDomain.Tests\UsersTests.cs
 C:\Users\User\.nuget\packages\microsoft.net.test.sdk\17.13.0\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.Program.cs
 C:\Users\User\.nuget\packages\microsoft.testplatform.testhost\17.13.0\build\netcoreapp3.1\x64\testhost.exe
 C:\Users\User\.nuget\packages\microsoft.testplatform.testhost\17.13.0\build\netcoreapp3.1\x64\testhost.dll

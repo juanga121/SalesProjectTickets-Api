@@ -63,7 +63,7 @@ namespace SalesProjectTickets.Api.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Policy = "Administrador")]
-        public async Task<IActionResult> EditTickets(Guid id, [FromForm]Tickets tickets, IFormFile formFile)
+        public async Task<IActionResult> EditTickets(Guid id, [FromForm]Tickets tickets, IFormFile? formFile)
         {
             var services = AddTicketsServices();
             tickets.Id = id;

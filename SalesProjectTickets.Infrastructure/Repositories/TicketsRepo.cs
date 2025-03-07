@@ -43,17 +43,37 @@ namespace SalesProjectTickets.Infrastructure.Repositories
             return entity;
         }
 
+        public async Task ChangeStateByValidation(Tickets entity)
+        {
+            var ticketsForChange = await _context.Tickets.FirstOrDefaultAsync(tickets => tickets.Id == entity.Id);
+
+            if (ticketsForChange != null)
+            {
+                ticketsForChange.State = entity.State;
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task Delete(Guid entityID)
         {
             var TickestForDelete = await _context.Tickets.FirstOrDefaultAsync(tickets => tickets.Id == entityID);
             if (TickestForDelete != null)
             {
+                if (!string.IsNullOrWhiteSpace(TickestForDelete.ImageUrl))
+                {
+                    var publicId = GetPublicIdFromUrl(TickestForDelete.ImageUrl);
+                    if (!string.IsNullOrEmpty(publicId))
+                    {
+                        var deletionParams = new DeletionParams(publicId);
+                        await _cloudinary.DestroyAsync(deletionParams);
+                    }
+                }
                 _context.Tickets.Remove(TickestForDelete);
                 await _context.SaveChangesAsync();
             }
         }
 
-        public async Task Edit(Tickets entity, IFormFile formFile)
+        public async Task Edit(Tickets entity, IFormFile? formFile)
         {
             var TickestForEdit = await _context.Tickets.FirstOrDefaultAsync(tickets => tickets.Id == entity.Id);
 
@@ -67,28 +87,41 @@ namespace SalesProjectTickets.Infrastructure.Repositories
                 TickestForEdit.Event_location = entity.Event_location;
                 TickestForEdit.Event_time = entity.Event_time;
 
-                if (formFile == null || formFile.Length == 0)
+                if (formFile == null)
                 {
-                    throw new ValidationException("Imagen requerida");
+                    await _context.SaveChangesAsync();
                 }
-
-                var uploadsParams = new ImageUploadParams()
+                else
                 {
-                    File = new FileDescription(formFile.FileName, formFile.OpenReadStream()),
-                    AssetFolder = "ApiTicketsConciertos"
-                };
+                    if (!string.IsNullOrWhiteSpace(TickestForEdit.ImageUrl))
+                    {
+                        var publicId = GetPublicIdFromUrl(TickestForEdit.ImageUrl);
 
-                var uploadResult = await _cloudinary.UploadAsync(uploadsParams);
+                        if (!string.IsNullOrEmpty(publicId))
+                        {
+                            var deletionParams = new DeletionParams(publicId);
+                            await _cloudinary.DestroyAsync(deletionParams);
+                        }
+                    }
 
-                if (uploadResult == null || string.IsNullOrWhiteSpace(uploadResult.SecureUrl.ToString()))
-                {
-                    throw new ValidationException("Error al subir la imagen");
+                    var uploadsParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(formFile?.FileName, formFile?.OpenReadStream()),
+                        AssetFolder = "ApiTicketsConciertos"
+                    };
+
+                    var uploadResult = await _cloudinary.UploadAsync(uploadsParams);
+
+                    if (uploadResult == null || string.IsNullOrWhiteSpace(uploadResult.SecureUrl.ToString()))
+                    {
+                        throw new ValidationException("Error al subir la imagen");
+                    }
+
+                    entity.ImageUrl = uploadResult.SecureUrl.ToString();
+
+                    TickestForEdit.ImageUrl = entity.ImageUrl;
+                    await _context.SaveChangesAsync();
                 }
-
-                entity.ImageUrl = uploadResult.SecureUrl.ToString();
-
-                TickestForEdit.ImageUrl = entity.ImageUrl;
-                await _context.SaveChangesAsync();
             }
         }
 
@@ -115,6 +148,15 @@ namespace SalesProjectTickets.Infrastructure.Repositories
         {
             var ticket = await _context.Tickets.FirstOrDefaultAsync(ticket => ticket.Id == entity);
             return ticket ?? throw new ValidationException("No se encontro el ticket");
+        }
+
+        private static string GetPublicIdFromUrl(string url)
+        {
+            var uri = new Uri(url);
+            var segments = uri.Segments;
+            var fileName = segments[^1];
+            var publicId = System.IO.Path.GetFileNameWithoutExtension(fileName);
+            return publicId;
         }
     }
 }

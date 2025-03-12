@@ -8,7 +8,7 @@ using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Enums;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
 
-namespace SalesProjectApplication.Tests
+namespace SalesProjectApplication.Tests.Application
 {
     public class TicketsTests
     {

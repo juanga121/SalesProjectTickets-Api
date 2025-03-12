@@ -6,6 +6,7 @@ using SalesProjectTickets.Application.Services;
 using SalesProjectTickets.Application.Validations;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
+using SalesProjectTickets.Infrastructure.Backgrounds;
 using SalesProjectTickets.Infrastructure.Provider;
 using SalesProjectTickets.Infrastructure.Repositories;
 using System.Text;
@@ -18,6 +19,11 @@ namespace SalesProjectTickets.Api.Injections
         {
             services.AddValidatorsFromAssembly(typeof(UserValidations).Assembly);
             services.AddValidatorsFromAssemblyContaining<UserValidations>();
+
+            services.AddScoped<IServiceTickets<Tickets>, TicketsServices>();
+            services.AddScoped<IRepoTickets<Tickets>, TicketsRepo>();
+
+            services.AddHostedService<TimerExpirationTickets>();
 
             services.AddScoped<IServiceLogin<LoginUsers>, LoginServices>();
             services.AddScoped<IRepoLogin<LoginUsers>, UserReposLogin>();

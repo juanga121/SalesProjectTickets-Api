@@ -2,10 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using SalesProjectTickets.Infrastructure.Contexts;
 using SalesProjectTickets.Api.Injections;
 using CloudinaryDotNet;
+using SalesProjectTickets.Application.Interfaces;
+using SalesProjectTickets.Domain.Entities;
+using SalesProjectTickets.Infrastructure.Backgrounds;
+using SalesProjectTickets.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddLogging();
 
 var connectionString = builder.Configuration.GetConnectionString("ConexionDB");
 builder.Services.AddDbContext<ContextsDaBa>(options => options.UseSqlServer(connectionString));

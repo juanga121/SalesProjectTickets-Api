@@ -65,7 +65,6 @@ namespace SalesProjectTickets.Application.Services
 
         public async Task<List<Tickets>> ListAllTickets()
         {
-            await ChangeState();
 
             var alltickets = await _repoTickets.ListAllTickets();
 

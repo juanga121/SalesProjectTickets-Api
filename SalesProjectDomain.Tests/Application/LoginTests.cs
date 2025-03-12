@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit.Sdk;
 
-namespace SalesProjectApplication.Tests
+namespace SalesProjectApplication.Tests.Application
 {
     public class LoginTests
     {

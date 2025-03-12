@@ -11,5 +11,6 @@ namespace SalesProjectTickets.Application.Interfaces
     public interface IServiceTickets<TEntity>
     : IAddTickets<TEntity>, IListTickets<TEntity>, IEditTickets<TEntity>, IDelete
     {
+        public Task ChangeState();
     }
 }

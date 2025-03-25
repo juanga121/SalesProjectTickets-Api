@@ -16,10 +16,10 @@ namespace SalesProjectTickets.Application.Validations
                 .NotEmpty().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
                 .Length(1, 100).WithMessage(MessagesCentral.MESSAGES_LENGTH);
             RuleFor(x => x.Quantity)
-                .NotEmpty().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
+                .NotNull().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
                 .GreaterThan(0).WithMessage(MessagesCentral.MESSAGES_GREATER_THAN_ZERO);
             RuleFor(x => x.Price)
-                .NotEmpty().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
+                .NotNull().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
                 .GreaterThan(0).WithMessage(MessagesCentral.MESSAGES_GREATER_THAN_ZERO);
             RuleFor(x => x.Event_date)
                 .GreaterThan(DateOnly.FromDateTime(DateTime.Now))
@@ -28,7 +28,7 @@ namespace SalesProjectTickets.Application.Validations
                 .NotEmpty().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS)
                 .Length(1, 100).WithMessage(MessagesCentral.MESSAGES_LENGTH);
             RuleFor(x => x.Event_time)
-                .NotEmpty().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS);
+                .NotNull().WithMessage(MessagesCentral.MESSAGES_REQUERID_FIELDS);
         }
     }
 }

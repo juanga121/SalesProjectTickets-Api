@@ -14,8 +14,16 @@ namespace SalesProjectTickets.Application.Services
         private readonly IRepoTickets<Tickets> _repoTickets = repoTickets;
         private readonly IValidator<Tickets> _validator = validator;
 
-        public async Task<Tickets> Add(Tickets entity, IFormFile formFile)
+        public async Task<Tickets> Add(Tickets entity, IFormFile? formFile)
         {
+            if (formFile == null || formFile.Length == 0)
+            {
+                var errors = new List<ValidationsError>
+                    {
+                        new("ImageUrl", "No se ha subido ninguna imagen")
+                    };
+                throw new PersonalException(errors);
+            }
             var resultValidation = _validator.Validate(entity);
             if (!resultValidation.IsValid)
             {
@@ -40,7 +48,8 @@ namespace SalesProjectTickets.Application.Services
                 {
                     ticket.State = State.Expirado;
                     await _repoTickets.ChangeStateByValidation(ticket);
-                } else
+                }
+                else
                 {
                     ticket.State = State.Disponible;
                     await _repoTickets.ChangeStateByValidation(ticket);
@@ -70,7 +79,7 @@ namespace SalesProjectTickets.Application.Services
 
             var listBy = await _repoTickets.ListByPermissions(Permissions.Administrador);
 
-            if(listBy)
+            if (listBy)
             {
                 return await _repoTickets.ListAllTickets();
             }

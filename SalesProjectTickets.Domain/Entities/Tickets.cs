@@ -4,13 +4,13 @@ namespace SalesProjectTickets.Domain.Entities
 {
     public class Tickets : EntityBase
     {
-        public required string Name { get; set; }
-        public required string Description { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public int? Quantity { get; set; }
+        public decimal? Price { get; set; }
         public DateOnly Event_date { get; set; }
-        public required string Event_location { get; set; }
-        public required string Event_time { get; set; }
+        public string? Event_location { get; set; }
+        public string? Event_time { get; set; }
         public State State { get; set; }
         public string? ImageUrl { get; set; }
 

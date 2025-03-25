@@ -16,16 +16,11 @@ namespace SalesProjectTickets.Infrastructure.Repositories
         private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
         private readonly Cloudinary _cloudinary = cloudinary;
 
-        public async Task<Tickets> Add(Tickets entity, IFormFile formFile)
+        public async Task<Tickets> Add(Tickets entity, IFormFile? formFile)
         {
-            if (formFile == null || formFile.Length == 0)
-            {
-                throw new ValidationException("Imagen requerida");
-            }
-
             var uploadsParams = new ImageUploadParams()
             {
-                File = new FileDescription(formFile.FileName, formFile.OpenReadStream()),
+                File = new FileDescription(formFile!.FileName, formFile.OpenReadStream()),
                 AssetFolder = "ApiTicketsConciertos"
             };
 

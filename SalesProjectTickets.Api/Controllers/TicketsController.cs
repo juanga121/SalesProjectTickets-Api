@@ -31,8 +31,8 @@ namespace SalesProjectTickets.Api.Controllers
 
         [HttpPost]
         [Route("AddTickets")]
-        [Authorize(Policy = "Administrador")]
-        public async Task<IActionResult> AddTickets([FromForm]Tickets tickets, IFormFile formFile)
+        //[Authorize(Policy = "Administrador")]
+        public async Task<IActionResult> AddTickets([FromForm]Tickets tickets, IFormFile? formFile)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace SalesProjectTickets.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Policy = "Administrador")]
+        [Authorize(Policy = "AdminAndConsu")]
         public async Task<ActionResult<Users>> Get(Guid id)
         {
             var service = AddTicketsServices();

@@ -97,6 +97,17 @@ namespace SalesProjectTickets.Application.Services
             return await Task.FromResult(false);
         }
 
+        public async Task<List<Tickets>> ListRecentlyAdded()
+        {
+            var RecentlyTen = await _repoTickets.ListRecentlyAdded();
+
+            return RecentlyTen
+                .Where(tickets => tickets.State == State.Disponible)
+                .OrderByDescending(tickets => tickets.Creation_date)
+                .Take(10)
+                .ToList();
+        }
+
         public Task<Tickets> SelectionById(Guid entity)
         {
             return _repoTickets.SelectionById(entity);

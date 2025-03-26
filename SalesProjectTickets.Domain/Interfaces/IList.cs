@@ -24,6 +24,8 @@ namespace SalesProjectTickets.Domain.Interfaces
 
         public Task<bool> ListByPermissions(Permissions entityPermi);
 
+        public Task<List<TEntity>> ListRecentlyAdded();
+
         public Task ChangeStateByValidation(TEntity entity);
     }
 }

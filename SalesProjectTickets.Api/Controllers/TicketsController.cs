@@ -31,7 +31,7 @@ namespace SalesProjectTickets.Api.Controllers
 
         [HttpPost]
         [Route("AddTickets")]
-        //[Authorize(Policy = "Administrador")]
+        [Authorize(Policy = "Administrador")]
         public async Task<IActionResult> AddTickets([FromForm]Tickets tickets, IFormFile? formFile)
         {
             try
@@ -59,6 +59,15 @@ namespace SalesProjectTickets.Api.Controllers
         {
             var services = AddTicketsServices();
             return Ok(await services.ListAllTickets());
+        }
+
+        [HttpGet]
+        [Route("ListRecently")]
+        [Authorize(Policy = "AdminAndConsu")]
+        public async Task<IActionResult> GetRecently()
+        {
+            var services = AddTicketsServices();
+            return Ok(await services.ListRecentlyAdded());
         }
 
         [HttpPut("{id}")]

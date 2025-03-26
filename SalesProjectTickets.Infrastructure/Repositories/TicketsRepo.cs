@@ -153,5 +153,10 @@ namespace SalesProjectTickets.Infrastructure.Repositories
             var publicId = System.IO.Path.GetFileNameWithoutExtension(fileName);
             return publicId;
         }
+
+        public async Task<List<Tickets>> ListRecentlyAdded()
+        {
+            return await _context.Tickets.ToListAsync(); 
+        }
     }
 }

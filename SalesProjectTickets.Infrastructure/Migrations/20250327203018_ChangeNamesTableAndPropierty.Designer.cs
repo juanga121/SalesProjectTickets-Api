@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesProjectTickets.Infrastructure.Contexts;
 
@@ -11,9 +12,11 @@ using SalesProjectTickets.Infrastructure.Contexts;
 namespace SalesProjectTickets.Infrastructure.Migrations
 {
     [DbContext(typeof(ContextsDaBa))]
-    partial class ContextsDaBaModelSnapshot : ModelSnapshot
+    [Migration("20250327203018_ChangeNamesTableAndPropierty")]
+    partial class ChangeNamesTableAndPropierty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,14 +46,20 @@ namespace SalesProjectTickets.Infrastructure.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("TicketsId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("TotalToPay")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<Guid?>("UsersId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("PaymentsId");
+                    b.HasIndex("TicketsId");
 
-                    b.HasIndex("PaymentsUsersId");
+                    b.HasIndex("UsersId");
 
                     b.ToTable("PurchaseHistory");
                 });
@@ -139,15 +148,11 @@ namespace SalesProjectTickets.Infrastructure.Migrations
                 {
                     b.HasOne("SalesProjectTickets.Domain.Entities.Tickets", "Tickets")
                         .WithMany("Payments")
-                        .HasForeignKey("PaymentsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TicketsId");
 
                     b.HasOne("SalesProjectTickets.Domain.Entities.Users", "Users")
                         .WithMany("PaymentsUsers")
-                        .HasForeignKey("PaymentsUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsersId");
 
                     b.Navigation("Tickets");
 

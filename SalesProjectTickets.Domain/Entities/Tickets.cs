@@ -13,6 +13,7 @@ namespace SalesProjectTickets.Domain.Entities
         public string? Event_time { get; set; }
         public State State { get; set; }
         public string? ImageUrl { get; set; }
+        public virtual ICollection<PurchaseHistory>? Payments { get; set; }
 
         public static Tickets Create(string name, string description, int quantity, decimal price, string event_location, string event_time, State state)
         {

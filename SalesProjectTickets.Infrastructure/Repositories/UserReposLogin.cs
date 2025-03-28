@@ -27,7 +27,8 @@ namespace SalesProjectTickets.Infrastructure.Repositories
             {
                 Email = user.Email,
                 Password = user.Password,
-                Permissions = user.Permissions
+                Permissions = user.Permissions,
+                Identity_User = user.Id
             };
         }
     }

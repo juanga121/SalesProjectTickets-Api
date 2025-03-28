@@ -9,6 +9,7 @@ namespace SalesProjectTickets.Domain.Entities
 {
     public class LoginUsers
     {
+        public Guid Identity_User { get; set; }
         public required string Email { get; set; }
         public required string Password { get; set; }
         public Permissions Permissions { get; set; }

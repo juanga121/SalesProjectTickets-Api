@@ -22,7 +22,8 @@ namespace SalesProjectTickets.Infrastructure.Provider
                 [
                     new Claim(JwtRegisteredClaimNames.Email, loginUsers.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim("Permissions", loginUsers.Permissions.ToString())
+                    new Claim("Permissions", loginUsers.Permissions.ToString()),
+                    new Claim("Id", loginUsers.Identity_User.ToString())
                 ]),
                 Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = Credentials,

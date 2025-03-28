@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SalesProjectTickets.Domain.Entities
@@ -12,13 +13,15 @@ namespace SalesProjectTickets.Domain.Entities
     {
         [ForeignKey("Tickets")]
         public Guid PaymentsId { get; set; }
+        [JsonIgnore]
         public virtual Tickets? Tickets { get; set; }
 
         [ForeignKey("Users")]
         public Guid PaymentsUsersId { get; set; }
+        [JsonIgnore]
         public virtual Users? Users { get; set; }
 
-        public int Quantity { get; set; }
+        public int QuantityHistory { get; set; }
         public decimal TotalToPay { get; set; }
         public PurchaseStatus PurchaseStatus { get; set; }
 

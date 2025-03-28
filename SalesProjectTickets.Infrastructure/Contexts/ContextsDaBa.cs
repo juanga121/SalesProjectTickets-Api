@@ -8,5 +8,7 @@ namespace SalesProjectTickets.Infrastructure.Contexts
         public DbSet<Users> Users { get; set; }
 
         public DbSet<Tickets> Tickets { get; set; }
+
+        public DbSet<PurchaseHistory> PurchaseHistory { get; set; }
     }
 }

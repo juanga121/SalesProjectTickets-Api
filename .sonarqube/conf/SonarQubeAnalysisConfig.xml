@@ -7,6 +7,7 @@
   <JavaExePath>C:\Users\User\.sonar\cache\11a61a94d383e755b08b4e5890a13d148bc9f95b7149cbbeec62efb8c75a4a67\OpenJDK17U-jre_x64_windows_hotspot_17.0.13_11.zip_extracted\jdk-17.0.13+11-jre/bin/java.exe</JavaExePath>
   <ScanAllAnalysis>true</ScanAllAnalysis>
   <HasBeginStepCommandLineCredentials>true</HasBeginStepCommandLineCredentials>
+  <HasBeginStepCommandLineTruststorePassword>false</HasBeginStepCommandLineTruststorePassword>
   <SonarQubeHostUrl>http://localhost:9000</SonarQubeHostUrl>
   <SonarQubeVersion>25.2.0.102705</SonarQubeVersion>
   <SonarProjectKey>PreubasApiTickets</SonarProjectKey>
@@ -16,7 +17,7 @@
     <ConfigSetting Id="VsCoverageConverterToolPath" />
     <ConfigSetting Id="UnchangedFilesPath" />
     <ConfigSetting Id="sonar.pullrequest.cache.basepath" Value="C:\Users\User\source\repos\SalesProjectTickets-Api" />
-    <ConfigSetting Id="settings.file.path" Value="C:\Users\User\.dotnet\tools\.store\dotnet-sonarscanner\9.1.0\dotnet-sonarscanner\9.1.0\tools\netcoreapp3.1\any\SonarQube.Analysis.xml" />
+    <ConfigSetting Id="settings.file.path" Value="C:\Users\User\.dotnet\tools\.store\dotnet-sonarscanner\10.1.1\dotnet-sonarscanner\10.1.1\tools\netcoreapp3.1\any\SonarQube.Analysis.xml" />
   </AdditionalConfig>
   <ServerSettings>
     <Property Name="sonar.cs.ignoreHeaderComments">true</Property>
@@ -143,11 +144,12 @@
     <Property Name="sonar.java.jvmframeworkconfig.activate">true</Property>
     <Property Name="sonar.updatecenter.url">https://downloads.sonarsource.com/sonarqube/update/update-center.properties</Property>
     <Property Name="sonar.core.id">147B411E-AZUBGbeU49hdhm9AEsBw</Property>
-    <Property Name="sonar.core.startTime">7/03/2025 2:42:11 p. m.</Property>
+    <Property Name="sonar.core.startTime">1/04/2025 11:46:58 a. m.</Property>
   </ServerSettings>
   <LocalSettings>
     <Property Name="sonar.host.url">http://localhost:9000</Property>
   </LocalSettings>
+  <ScannerOptsSettings />
   <AnalyzersSettings>
     <AnalyzerSettings>
       <Language>cs</Language>
@@ -156,8 +158,8 @@
       <AnalyzerPlugins>
         <AnalyzerPlugin Key="csharp" Version="10.6.0.109712" StaticResourceName="SonarAnalyzer-csharp-10.6.0.109712.zip">
           <AssemblyPaths>
-            <Path>C:\Users\User\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.CSharp.dll</Path>
-            <Path>C:\Users\User\AppData\Local\Temp\.sonarqube\resources\2\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\User\AppData\Local\Temp\.sonarqube\resources\4\SonarAnalyzer.CSharp.dll</Path>
+            <Path>C:\Users\User\AppData\Local\Temp\.sonarqube\resources\4\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
       </AnalyzerPlugins>
@@ -172,8 +174,8 @@
       <AnalyzerPlugins>
         <AnalyzerPlugin Key="vbnet" Version="10.6.0.109712" StaticResourceName="SonarAnalyzer-vbnet-10.6.0.109712.zip">
           <AssemblyPaths>
-            <Path>C:\Users\User\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.VisualBasic.dll</Path>
-            <Path>C:\Users\User\AppData\Local\Temp\.sonarqube\resources\3\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\User\AppData\Local\Temp\.sonarqube\resources\5\SonarAnalyzer.VisualBasic.dll</Path>
+            <Path>C:\Users\User\AppData\Local\Temp\.sonarqube\resources\5\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
       </AnalyzerPlugins>

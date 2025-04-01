@@ -1,4 +1,5 @@
-﻿C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Contexts\ContextsDaBa.cs
+﻿C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Backgrounds\TimerExpirationTickets.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Contexts\ContextsDaBa.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250120213157_SalesTicketsApi.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250120213157_SalesTicketsApi.Designer.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250214210901_permi.cs
@@ -11,8 +12,17 @@ C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastru
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250228212352_CanceluseTimeOnlyIuseString.Designer.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250304213648_AddImageUrlString.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250304213648_AddImageUrlString.Designer.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250327201446_AddedPaymentTableAndRelations.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250327201446_AddedPaymentTableAndRelations.Designer.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250327203018_ChangeNamesTableAndPropierty.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250327203018_ChangeNamesTableAndPropierty.Designer.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250327210311_ChangeForeingKey.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250327210311_ChangeForeingKey.Designer.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250328214510_ChangeQuantityHistory.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\20250328214510_ChangeQuantityHistory.Designer.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Migrations\ContextsDaBaModelSnapshot.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Provider\TokenProvider.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Repositories\PaymentProcessRepo.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Repositories\TicketsRepo.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Repositories\UserRepos.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Infrastructure\Repositories\UserReposLogin.cs

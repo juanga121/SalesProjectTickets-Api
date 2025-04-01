@@ -31,9 +31,19 @@ namespace SalesProjectTickets.Application.Services
             await _repoPaymentProcess.AddRetention(purchaseHistory);
         }
 
+        public async Task<PurchaseHistory> GetPurchaseById(Guid id)
+        {
+            return await _repoPaymentProcess.GetPurchaseById(id);
+        }
+
         public async Task<Tickets> GetTicketsById(Guid id)
         {
             return await _repoPaymentProcess.GetTicketsById(id);
+        }
+
+        public async Task UpdatePaymentProcess(PurchaseHistory purchaseHistory)
+        {
+            await _repoPaymentProcess.UpdatePaymentProcess(purchaseHistory);
         }
 
         public async Task UpdateTickets(Tickets tickets)

@@ -1,8 +1,10 @@
 ﻿C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Application\Exceptions\PersonalExceptions.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Application\Interfaces\IServiceLogin.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Application\Interfaces\IServicePaymentProcess.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Application\Interfaces\IServiceTickets.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Application\Interfaces\IServiceUsers.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Application\Services\LoginServices.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Application\Services\PaymentProcessService.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Application\Services\TicketsServices.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Application\Services\UsersServices.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Application\Shared\ConstantsUser.cs

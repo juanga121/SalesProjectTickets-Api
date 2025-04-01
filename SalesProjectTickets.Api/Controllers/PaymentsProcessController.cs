@@ -35,5 +35,28 @@ namespace SalesProjectTickets.Api.Controllers
                 return BadRequest(new { errors = ex.Message });
             }
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePayment(Guid id, PurchaseHistory purchaseHistory)
+        {
+            try
+            {
+                var service = PaymentProcessService();
+                purchaseHistory.Id = id;
+                await service.UpdatePaymentProcess(purchaseHistory);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { errors = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPurchaseById(Guid id)
+        {
+            var service = PaymentProcessService();
+            return Ok(await service.GetPurchaseById(id));
+        }
     }
 }

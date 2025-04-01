@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SalesProjectTickets.Domain.Entities;
+using SalesProjectTickets.Domain.Enums;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
 using SalesProjectTickets.Infrastructure.Contexts;
 using System;
@@ -20,10 +21,30 @@ namespace SalesProjectTickets.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<PurchaseHistory> GetPurchaseById(Guid id)
+        {
+            var tickets = await _context.PurchaseHistory
+                .Where(payment => payment.Id == id && payment.PurchaseStatus == PurchaseStatus.Retencion)
+                .OrderByDescending(payment => payment.Creation_date)
+                .FirstOrDefaultAsync();
+            return tickets ?? throw new Exception("No se encontro el pago");
+        }
+
         public async Task<Tickets> GetTicketsById(Guid id)
         {
             var tickets = await _context.Tickets.FirstOrDefaultAsync(ticket => ticket.Id == id);
             return tickets ?? throw new Exception("No se encontro el ticket");
+        }
+
+        public async Task UpdatePaymentProcess(PurchaseHistory purchaseHistory)
+        {
+            var ticket = await _context.PurchaseHistory.FirstOrDefaultAsync(ticket => ticket.Id == purchaseHistory.Id);
+
+            if (ticket != null)
+            {
+                ticket.PurchaseStatus = purchaseHistory.PurchaseStatus;
+                _context.SaveChanges();
+            }
         }
 
         public async Task UpdateTickets(Tickets tickets)

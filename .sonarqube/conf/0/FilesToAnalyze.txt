@@ -1,10 +1,12 @@
 ﻿C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Entities\EntityBase.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Entities\LoginUsers.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Entities\PurchaseHistory.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Entities\Tickets.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Entities\Users.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Entities\ValidationsError.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Enums\Identity.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Enums\Permissions.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Enums\PurchaseStatus.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Enums\State.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Interfaces\IAdd.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Interfaces\IDelete.cs
@@ -12,5 +14,6 @@ C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\In
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Interfaces\IList.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Interfaces\ILoginUsers.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Interfaces\Repositories\IRepoLogin.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Interfaces\Repositories\IRepoPaymentProcess.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Interfaces\Repositories\IRepoTickets.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Domain\Interfaces\Repositories\IRepoUsers.cs

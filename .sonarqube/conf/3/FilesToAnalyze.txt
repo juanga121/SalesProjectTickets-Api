@@ -1,4 +1,5 @@
 ﻿C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Api\Controllers\LoginController.cs
+C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Api\Controllers\PaymentsProcessController.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Api\Controllers\TicketsController.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Api\Controllers\UsersController.cs
 C:\Users\User\source\repos\SalesProjectTickets-Api\SalesProjectTickets.Api\Injections\Injections.cs

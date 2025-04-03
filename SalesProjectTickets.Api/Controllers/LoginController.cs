@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using SalesProjectTickets.Application.DTOs;
 using SalesProjectTickets.Application.Interfaces;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Infrastructure.Provider;
@@ -8,12 +10,13 @@ namespace SalesProjectTickets.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController(IServiceLogin<LoginUsers> _servicesLogin, TokenProvider tokenProvider) : ControllerBase
+    public class LoginController(IServiceLogin<LoginDTO> _servicesLogin, TokenProvider tokenProvider, IMapper mapper) : ControllerBase
     {
-        private readonly IServiceLogin<LoginUsers> servicesLogin = _servicesLogin;
+        private readonly IServiceLogin<LoginDTO> servicesLogin = _servicesLogin;
+        private readonly IMapper _mapper = mapper;
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginUsers loginUsers)
+        public async Task<IActionResult> Login(LoginDTO loginUsers)
         {
             try
             {
@@ -26,7 +29,8 @@ namespace SalesProjectTickets.Api.Controllers
                     });
                 }
 
-                var token = tokenProvider.GenerateToken(users);
+                var loginEntity = _mapper.Map<LoginUsers>(users);
+                var token = tokenProvider.GenerateToken(loginEntity);
 
                 return Ok(new
                 {

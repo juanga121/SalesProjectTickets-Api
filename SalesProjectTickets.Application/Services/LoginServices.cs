@@ -1,4 +1,6 @@
-﻿using SalesProjectTickets.Application.Interfaces;
+﻿using AutoMapper;
+using SalesProjectTickets.Application.DTOs;
+using SalesProjectTickets.Application.Interfaces;
 using SalesProjectTickets.Application.Shared;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
@@ -6,19 +8,27 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SalesProjectTickets.Application.Services
 {
-    public class LoginServices(IRepoLogin<LoginUsers> _repoLogin) : IServiceLogin<LoginUsers>
+    public class LoginServices(IRepoLogin<LoginUsers> _repoLogin, IMapper mapper) : IServiceLogin<LoginDTO>
     {
         private readonly IRepoLogin<LoginUsers> repoLogin = _repoLogin;
+        private readonly IMapper _mapper = mapper;
 
-        public async Task<LoginUsers?> Login(LoginUsers entity)
+        public async Task<LoginDTO?> Login(LoginDTO entityDTO)
         {
-            var userExisting = await repoLogin.Verify(entity);
-            return userExisting ?? throw new ValidationException(MessagesCentral.MESSAGES_VERIFY_USER);
+            var entityLogin = _mapper.Map<LoginUsers>(entityDTO);
+
+            var userExisting = await repoLogin.Verify(entityLogin);
+
+            return userExisting == null
+                ? throw new ValidationException(MessagesCentral.MESSAGES_VERIFY_USER)
+                : _mapper.Map<LoginDTO>(userExisting);
         }
 
-        public async Task<LoginUsers?> Verify(LoginUsers loginUsers)
+        public async Task<LoginDTO?> Verify(LoginDTO loginUsersDTO)
         {
-            return await repoLogin.Verify(loginUsers);
+            var loginUsers = _mapper.Map<LoginUsers>(loginUsersDTO);
+            var userExisting = await repoLogin.Verify(loginUsers);
+            return userExisting != null ? _mapper.Map<LoginDTO>(userExisting) : null;
         }
     }
 }

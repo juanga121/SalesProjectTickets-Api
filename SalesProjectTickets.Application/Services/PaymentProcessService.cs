@@ -1,4 +1,6 @@
-﻿using SalesProjectTickets.Application.Interfaces;
+﻿using AutoMapper;
+using SalesProjectTickets.Application.DTOs;
+using SalesProjectTickets.Application.Interfaces;
 using SalesProjectTickets.Domain.Entities;
 using SalesProjectTickets.Domain.Enums;
 using SalesProjectTickets.Domain.Interfaces.Repositories;
@@ -10,9 +12,10 @@ using System.Threading.Tasks;
 
 namespace SalesProjectTickets.Application.Services
 {
-    public class PaymentProcessService(IRepoPaymentProcess repoPaymentProcess) : IServicePaymentProcess
+    public class PaymentProcessService(IRepoPaymentProcess repoPaymentProcess, IMapper mapper) : IServicePaymentProcess
     {
         private readonly IRepoPaymentProcess _repoPaymentProcess = repoPaymentProcess;
+        private readonly IMapper _mapper = mapper;
         public async Task AddRetention(PurchaseHistory purchaseHistory)
         {
             var tickets = await _repoPaymentProcess.GetTicketsById(purchaseHistory.PaymentsId);
@@ -28,12 +31,24 @@ namespace SalesProjectTickets.Application.Services
             purchaseHistory.TotalToPay = tickets.Price!.Value * purchaseHistory.QuantityHistory;
 
             purchaseHistory.PurchaseStatus = PurchaseStatus.Retencion;
+            purchaseHistory.Creation_date = DateTime.Now;
             await _repoPaymentProcess.AddRetention(purchaseHistory);
         }
 
         public async Task<PurchaseHistory> GetPurchaseById(Guid id)
         {
             return await _repoPaymentProcess.GetPurchaseById(id);
+        }
+
+        public async Task<List<PaymentProcessDTO>> GetPurchaseHistoryByAdmin()
+        {
+            var purchaseHistory = await _repoPaymentProcess.GetPurchaseHistoryByAdmin();
+            return _mapper.Map<List<PaymentProcessDTO>>(purchaseHistory);
+        }
+
+        public Task<List<PaymentProcessDTO>> GetPurchaseHistoryByUser(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Tickets> GetTicketsById(Guid id)

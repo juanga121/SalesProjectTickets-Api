@@ -1,4 +1,5 @@
-﻿using SalesProjectTickets.Domain.Entities;
+﻿using SalesProjectTickets.Application.DTOs;
+using SalesProjectTickets.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace SalesProjectTickets.Application.Interfaces
         public Task UpdateTickets(Tickets tickets);
         public Task UpdatePaymentProcess(PurchaseHistory purchaseHistory);
         public Task<PurchaseHistory> GetPurchaseById(Guid id);
+        public Task<List<PaymentProcessDTO>> GetPurchaseHistoryByAdmin();
+        public Task<List<PaymentProcessDTO>> GetPurchaseHistoryByUser(Guid id);
     }
 }

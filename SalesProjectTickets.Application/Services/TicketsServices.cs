@@ -84,7 +84,7 @@ namespace SalesProjectTickets.Application.Services
                 return await _repoTickets.ListAllTickets();
             }
 
-            return alltickets.Where(tickets => tickets.State == State.Disponible).ToList();
+            return [.. alltickets.Where(tickets => tickets.State == State.Disponible)];
         }
 
         public async Task<bool> ListByPermissions(Permissions entityPermi)

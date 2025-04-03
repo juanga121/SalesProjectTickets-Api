@@ -1,7 +1,9 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using SalesProjectTickets.Application.DTOs;
 using SalesProjectTickets.Application.Interfaces;
+using SalesProjectTickets.Application.Mapping;
 using SalesProjectTickets.Application.Services;
 using SalesProjectTickets.Application.Validations;
 using SalesProjectTickets.Domain.Entities;
@@ -25,8 +27,14 @@ namespace SalesProjectTickets.Api.Injections
 
             services.AddHostedService<TimerExpirationTickets>();
 
-            services.AddScoped<IServiceLogin<LoginUsers>, LoginServices>();
+            /*services.AddScoped<IServiceLogin<LoginUsers>, LoginServices>();
+            services.AddScoped<IRepoLogin<LoginUsers>, UserReposLogin>();*/
+
+            services.AddAutoMapper(typeof(AutoMapperProfile));
+
+            services.AddScoped<IServiceLogin<LoginDTO>, LoginServices>();
             services.AddScoped<IRepoLogin<LoginUsers>, UserReposLogin>();
+
             services.AddSingleton<TokenProvider>();
             services.AddHttpContextAccessor();
 

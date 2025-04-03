@@ -24,10 +24,25 @@ namespace SalesProjectTickets.Infrastructure.Repositories
         public async Task<PurchaseHistory> GetPurchaseById(Guid id)
         {
             var tickets = await _context.PurchaseHistory
-                .Where(payment => payment.Id == id && payment.PurchaseStatus == PurchaseStatus.Retencion)
+                .Where(payment => payment.PaymentsUsersId == id && payment.PurchaseStatus == PurchaseStatus.Retencion)
                 .OrderByDescending(payment => payment.Creation_date)
                 .FirstOrDefaultAsync();
+
             return tickets ?? throw new Exception("No se encontro el pago");
+        }
+
+        public async Task<List<PurchaseHistory>> GetPurchaseHistoryByAdmin()
+        {
+            return await _context.PurchaseHistory
+                .Include(p => p.Users)
+                .Include(p => p.Tickets)
+                .OrderByDescending(p => p.Creation_date)
+                .ToListAsync();
+        }
+
+        public Task<List<PurchaseHistory>> GetPurchaseHistoryByUser(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Tickets> GetTicketsById(Guid id)
@@ -38,11 +53,11 @@ namespace SalesProjectTickets.Infrastructure.Repositories
 
         public async Task UpdatePaymentProcess(PurchaseHistory purchaseHistory)
         {
-            var ticket = await _context.PurchaseHistory.FirstOrDefaultAsync(ticket => ticket.Id == purchaseHistory.Id);
+            var purchase = await _context.PurchaseHistory.FirstOrDefaultAsync(ticket => ticket.Id == purchaseHistory.Id);
 
-            if (ticket != null)
+            if (purchase != null)
             {
-                ticket.PurchaseStatus = purchaseHistory.PurchaseStatus;
+                purchase.PurchaseStatus = purchaseHistory.PurchaseStatus;
                 _context.SaveChanges();
             }
         }

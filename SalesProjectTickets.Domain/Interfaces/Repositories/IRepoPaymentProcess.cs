@@ -14,5 +14,7 @@ namespace SalesProjectTickets.Domain.Interfaces.Repositories
         public Task UpdateTickets(Tickets tickets);
         public Task UpdatePaymentProcess(PurchaseHistory purchaseHistory);
         public Task<PurchaseHistory> GetPurchaseById(Guid id);
+        public Task<List<PurchaseHistory>> GetPurchaseHistoryByAdmin();
+        public Task<List<PurchaseHistory>> GetPurchaseHistoryByUser(Guid id);
     }
 }

@@ -40,9 +40,14 @@ namespace SalesProjectTickets.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public Task<List<PurchaseHistory>> GetPurchaseHistoryByUser(Guid id)
+        public async Task<List<PurchaseHistory>> GetPurchaseHistoryByUser(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.PurchaseHistory
+                .Include(p => p.Users)
+                .Include(p => p.Tickets)
+                .Where(p => p.PaymentsUsersId == id)
+                .OrderByDescending(p => p.Creation_date)
+                .ToListAsync();
         }
 
         public async Task<Tickets> GetTicketsById(Guid id)

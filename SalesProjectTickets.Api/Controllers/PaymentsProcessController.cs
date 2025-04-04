@@ -57,7 +57,8 @@ namespace SalesProjectTickets.Api.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetPurchaseById/{id}")]
         [Authorize(Policy = "AdminAndConsu")]
         public async Task<IActionResult> GetPurchaseById(Guid id)
         {
@@ -71,6 +72,14 @@ namespace SalesProjectTickets.Api.Controllers
         {
             var service = PaymentProcessService();
             return Ok(await service.GetPurchaseHistoryByAdmin());
+        }
+
+        [HttpGet]
+        [Route("GetPurchaseHistoryByUser/{id}")]
+        public async Task<IActionResult> GetPurchaseHistoryByUser(Guid id)
+        {
+            var service = PaymentProcessService();
+            return Ok(await service.GetPurchaseHistoryByUser(id));
         }
     }
 }

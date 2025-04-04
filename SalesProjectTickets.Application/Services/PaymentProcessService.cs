@@ -46,9 +46,10 @@ namespace SalesProjectTickets.Application.Services
             return _mapper.Map<List<PaymentProcessDTO>>(purchaseHistory);
         }
 
-        public Task<List<PaymentProcessDTO>> GetPurchaseHistoryByUser(Guid id)
+        public async Task<List<PaymentProcessDTO>> GetPurchaseHistoryByUser(Guid id)
         {
-            throw new NotImplementedException();
+            var purchaseHistory = await _repoPaymentProcess.GetPurchaseHistoryByUser(id);
+            return _mapper.Map<List<PaymentProcessDTO>>(purchaseHistory);
         }
 
         public async Task<Tickets> GetTicketsById(Guid id)

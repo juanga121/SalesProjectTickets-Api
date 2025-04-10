@@ -101,11 +101,10 @@ namespace SalesProjectTickets.Application.Services
         {
             var RecentlyTen = await _repoTickets.ListRecentlyAdded();
 
-            return RecentlyTen
+            return [.. RecentlyTen
                 .Where(tickets => tickets.State == State.Disponible)
                 .OrderByDescending(tickets => tickets.Creation_date)
-                .Take(10)
-                .ToList();
+                .Take(10)];
         }
 
         public Task<Tickets> SelectionById(Guid entity)

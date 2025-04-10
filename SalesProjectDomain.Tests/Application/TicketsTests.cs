@@ -38,7 +38,9 @@ namespace SalesProjectApplication.Tests.Application
                 State = State.Disponible,
             };
 
-            var image = new Mock<IFormFile>().Object;
+            var image = new Mock<IFormFile>();
+            image.Setup(x => x.Length).Returns(1);
+            var mockImage = image.Object;
 
             var validationsFailures = new List<ValidationFailure>
             {
@@ -47,10 +49,33 @@ namespace SalesProjectApplication.Tests.Application
 
             _mockValidator.Setup(x => x.Validate(invalidInfo)).Returns(new ValidationResult(validationsFailures));
 
-            var exception = await Assert.ThrowsAsync<PersonalException>(async () => await _ticketsServices.Add(invalidInfo, image));
+            var exception = await Assert.ThrowsAsync<PersonalException>(async () => await _ticketsServices.Add(invalidInfo, mockImage));
 
             Assert.Equal("Error de validación", exception.Message);
             Assert.Contains(exception.Errors, e => e.PropertyName == "Name" && e.ErrorMessage == "El nombre debe tener entre 3 a 50 caracteres");
+        }
+
+        [Fact]
+        public async Task Add_Exception_Validation_For_Image()
+        {
+            var invalidInfo = new Tickets
+            {
+                Name = "Concierto",
+                Description = "Concierto de rock",
+                Quantity = 100,
+                Price = 50000,
+                Event_date = DateOnly.FromDateTime(DateTime.Now),
+                Event_location = "Estadio",
+                Event_time = "12:00",
+                State = State.Disponible
+            };
+
+            var image = new Mock<IFormFile>().Object;
+
+            var exception = await Assert.ThrowsAsync<PersonalException>(async () => await _ticketsServices.Add(invalidInfo, image));
+
+            Assert.Equal("Error de validación", exception.Message);
+            Assert.Contains(exception.Errors, e => e.PropertyName == "ImageUrl" && e.ErrorMessage == "No se ha subido ninguna imagen");
         }
 
         [Fact]
@@ -68,11 +93,13 @@ namespace SalesProjectApplication.Tests.Application
                 State = State.Disponible
             };
 
-            var image = new Mock<IFormFile>().Object;
+            var image = new Mock<IFormFile>();
+            image.Setup(x => x.Length).Returns(1);
+            var mockImage = image.Object;
 
             _mockValidator.Setup(x => x.Validate(validInfo)).Returns(new ValidationResult());
 
-            var result = await _ticketsServices.Add(validInfo, image);
+            var result = await _ticketsServices.Add(validInfo, mockImage);
 
             Assert.Equal(validInfo, result);
             Assert.Equal(State.Disponible, result.State);

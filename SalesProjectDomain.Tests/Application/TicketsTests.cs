@@ -166,6 +166,42 @@ namespace SalesProjectApplication.Tests.Application
         }
 
         [Fact]
+        public async Task ChangeState_not()
+        {
+            var allTickets = new List<Tickets>
+            {
+                new()
+                {
+                    Name = "Concierto",
+                    Description = "Concierto de rock",
+                    Quantity = 100,
+                    Price = 50000,
+                    Event_date = DateOnly.FromDateTime(DateTime.Now.AddDays(4)),
+                    Event_location = "Estadio",
+                    Event_time = "12:00",
+                    State = State.Disponible
+                },
+                new()
+                {
+                    Name = "Concierto",
+                    Description = "Concierto de rock",
+                    Quantity = 100,
+                    Price = 50000,
+                    Event_date = DateOnly.FromDateTime(DateTime.Now.AddDays(4)),
+                    Event_location = "Estadio",
+                    Event_time = "12:00",
+                    State = State.Disponible
+                }
+            };
+
+            _mockRepo.Setup(x => x.ListAllTickets()).ReturnsAsync(allTickets);
+
+            await _ticketsServices.ChangeState();
+
+            Assert.All(allTickets, ticket => Assert.Equal(State.Disponible, ticket.State));
+        }
+
+        [Fact]
         public async Task ListAllTickets_Admin()
         {
             var allTickets = new List<Tickets>
@@ -240,6 +276,54 @@ namespace SalesProjectApplication.Tests.Application
 
             Assert.DoesNotContain(result, ticket => ticket.State == State.Expirado);
             Assert.Contains(result, ticket => ticket.State == State.Disponible);
+        }
+
+        [Fact]
+        public async Task ListRecentlyAdded()
+        {
+            var allTickets = new List<Tickets>
+            {
+                new()
+                {
+                    Name = "Concierto",
+                    Description = "Concierto de rock",
+                    Quantity = 100,
+                    Price = 50000,
+                    Event_date = DateOnly.FromDateTime(DateTime.Now.AddDays(2)),
+                    Event_location = "Estadio",
+                    Event_time = "12:00",
+                    State = State.Disponible
+                },
+                new()
+                {
+                    Name = "Concierto",
+                    Description = "Concierto de rock",
+                    Quantity = 100,
+                    Price = 50000,
+                    Event_date = DateOnly.FromDateTime(DateTime.Now.AddDays(4)),
+                    Event_location = "Estadio",
+                    Event_time = "12:00",
+                    State = State.Expirado
+                },
+                new()
+                {
+                    Name = "Concierto pedro",
+                    Description = "Concierto",
+                    Quantity = 100,
+                    Price = 50000,
+                    Event_date = DateOnly.FromDateTime(DateTime.Now.AddDays(1)),
+                    Event_location = "Estadio palo",
+                    Event_time = "12:20",
+                    State = State.Disponible
+                }
+            };
+
+            _mockRepo.Setup(x => x.ListRecentlyAdded()).ReturnsAsync(allTickets);
+
+            var result = await _ticketsServices.ListRecentlyAdded();
+
+            Assert.Equal(2, result.Count);
+            Assert.Equal(State.Disponible, result[0].State);
         }
     }
 }

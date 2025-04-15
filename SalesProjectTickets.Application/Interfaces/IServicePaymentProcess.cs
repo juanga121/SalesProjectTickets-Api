@@ -17,5 +17,6 @@ namespace SalesProjectTickets.Application.Interfaces
         public Task<PurchaseHistory> GetPurchaseById(Guid id);
         public Task<List<PaymentProcessDTO>> GetPurchaseHistoryByAdmin();
         public Task<List<PaymentProcessDTO>> GetPurchaseHistoryByUser(Guid id);
+        public Task ChangeStatusAfter(PurchaseHistory purchaseHistory);
     }
 }

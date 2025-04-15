@@ -35,6 +35,17 @@ namespace SalesProjectTickets.Application.Services
             await _repoPaymentProcess.AddRetention(purchaseHistory);
         }
 
+        public async Task ChangeStatusAfter(PurchaseHistory purchaseHistory)
+        {
+            TimeSpan timeSpan = DateTime.Now - purchaseHistory.Creation_date;
+
+            if (timeSpan.TotalMinutes >= 15)
+            {
+                purchaseHistory.PurchaseStatus = PurchaseStatus.Expirado;
+                await _repoPaymentProcess.UpdatePaymentProcess(purchaseHistory);
+            }
+        }
+
         public async Task<PurchaseHistory> GetPurchaseById(Guid id)
         {
             return await _repoPaymentProcess.GetPurchaseById(id);

@@ -74,7 +74,6 @@ namespace SalesProjectTickets.Application.Services
 
         public async Task<List<Tickets>> ListAllTickets()
         {
-
             var alltickets = await _repoTickets.ListAllTickets();
 
             var listBy = await _repoTickets.ListByPermissions(Permissions.Administrador);

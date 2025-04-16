@@ -25,7 +25,11 @@ namespace SalesProjectTickets.Api.Injections
             services.AddScoped<IServiceTickets<Tickets>, TicketsServices>();
             services.AddScoped<IRepoTickets<Tickets>, TicketsRepo>();
 
+            services.AddScoped<IServicePaymentProcess, PaymentProcessService>();
+            services.AddScoped<IRepoPaymentProcess, PaymentProcessRepo>();
+
             services.AddHostedService<TimerExpirationTickets>();
+            services.AddHostedService<TimerExpirationPaymentProcess>();
 
             /*services.AddScoped<IServiceLogin<LoginUsers>, LoginServices>();
             services.AddScoped<IRepoLogin<LoginUsers>, UserReposLogin>();*/

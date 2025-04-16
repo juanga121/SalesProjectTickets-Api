@@ -30,10 +30,10 @@ namespace SalesProjectTickets.Infrastructure.Backgrounds
             using var scope = _serviceProvider.CreateScope();
             try
             {
-                _logger.LogInformation("Iniciando cambio de estado");
+                _logger.LogInformation("Iniciando cambio de estado en pagos");
                 PurchaseHistory purchaseHistory = new();
                 var paymentServices = scope.ServiceProvider.GetRequiredService<IServicePaymentProcess>();
-                await paymentServices.ChangeStatusAfter(purchaseHistory);
+                await paymentServices.ChangeStatusAfter();
             }
             catch (Exception ex)
             {

@@ -56,6 +56,11 @@ namespace SalesProjectTickets.Infrastructure.Repositories
             return tickets ?? throw new Exception("No se encontro el ticket");
         }
 
+        public async Task<List<PurchaseHistory>> RetentionList()
+        {
+            return await _context.PurchaseHistory.ToListAsync();
+        }
+
         public async Task UpdatePaymentProcess(PurchaseHistory purchaseHistory)
         {
             var purchase = await _context.PurchaseHistory.FirstOrDefaultAsync(ticket => ticket.Id == purchaseHistory.Id);

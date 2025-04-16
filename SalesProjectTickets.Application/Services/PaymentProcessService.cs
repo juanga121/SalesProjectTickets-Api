@@ -35,14 +35,18 @@ namespace SalesProjectTickets.Application.Services
             await _repoPaymentProcess.AddRetention(purchaseHistory);
         }
 
-        public async Task ChangeStatusAfter(PurchaseHistory purchaseHistory)
+        public async Task ChangeStatusAfter()
         {
-            TimeSpan timeSpan = DateTime.Now - purchaseHistory.Creation_date;
-
-            if (timeSpan.TotalMinutes >= 15)
+            var purchaseHistory = await _repoPaymentProcess.RetentionList();
+            foreach (var purchase in purchaseHistory)
             {
-                purchaseHistory.PurchaseStatus = PurchaseStatus.Expirado;
-                await _repoPaymentProcess.UpdatePaymentProcess(purchaseHistory);
+                TimeSpan timeSpan = DateTime.Now - purchase.Creation_date;
+
+                if (timeSpan.TotalMinutes >= 15 && purchase.PurchaseStatus == PurchaseStatus.Retencion)
+                {
+                    purchase.PurchaseStatus = PurchaseStatus.Expirado;
+                    await _repoPaymentProcess.UpdatePaymentProcess(purchase);
+                }
             }
         }
 
@@ -66,6 +70,12 @@ namespace SalesProjectTickets.Application.Services
         public async Task<Tickets> GetTicketsById(Guid id)
         {
             return await _repoPaymentProcess.GetTicketsById(id);
+        }
+
+        public async Task<List<PurchaseHistory>> RetentionList()
+        {
+            var ticketsRetention = await _repoPaymentProcess.RetentionList();
+            return [.. ticketsRetention.Where(x => x.PurchaseStatus == PurchaseStatus.Retencion)];
         }
 
         public async Task UpdatePaymentProcess(PurchaseHistory purchaseHistory)
